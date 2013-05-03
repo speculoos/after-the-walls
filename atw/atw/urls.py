@@ -1,16 +1,13 @@
 from django.conf.urls import patterns, include, url
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
+
+from atw.views import HomePageView
 
 urlpatterns = patterns('',
-    url(r'^$', 'utopia.views.home', name='home'),
-    # url(r'^atw/', include('atw.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^u/', include('utopia.urls')),
+    
+    url(r'^admin/', include(admin.site.urls)),
 )

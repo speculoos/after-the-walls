@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>{% block title %}After the walls{% endblock %}</title>
+
+
+<script src="{{ STATIC_URL }}js/lib/jquery.js"></script>
+<script src="{{ STATIC_URL }}js/lib/underscore-min.js"></script>
+<script src="{{ STATIC_URL }}js/lib/backbone.js"></script>
+<script src="{{ STATIC_URL }}js/lib/template.js"></script>
+
+
+<script>
+window.ATW = {
+    Config:{
+        API_URL: '/u/api/',
+        user_name: {% if user %}'{{user}}'{% else %}undefined{% endif %},
+        api_key: {% if key %}'{{key}}'{% else %}undefined{% endif %},
+    },
+};
+</script>
+
+<script src="{{ STATIC_URL }}js/backbone_generic.js"></script>
+
+
+
+</head>
+
+<body>
+<h1>After the walls (UTOPIA/DYSTOPIA)</h1>
+<p>
+Soon.
+</p>
+
+</body>
+</html>
