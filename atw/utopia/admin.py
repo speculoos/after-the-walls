@@ -11,3 +11,5 @@ class EpisodeAdmin(admin.ModelAdmin):
     inlines = [MediaInline]
 
 admin.site.register(Episode, EpisodeAdmin)
+admin.site.register(HomeImage)
+admin.site.register(Media)

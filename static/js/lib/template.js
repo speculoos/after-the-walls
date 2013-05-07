@@ -8,7 +8,7 @@
 // Util.Template
 window.Template = {} || window.Template;
 window.Template = _.extend(window.Template,{
-    base_url: '/js/templates/',
+    base_url: '/static/js/templates/',
     cache: {},
     waiting: {},
     loading:{},

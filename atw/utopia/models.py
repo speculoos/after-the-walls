@@ -6,6 +6,25 @@ utopia.models
 from django.db import models
 from django.template.defaultfilters import slugify
 
+from adminsortable.models import Sortable
+
+class HomeImage(Sortable):
+    class Meta(Sortable.Meta):
+        verbose_name = "Image d'accueil"
+        verbose_name_plural = "Images d'accueil"
+    
+    slug = models.SlugField(max_length=255, editable=False, default='None')
+    image = models.ImageField(upload_to='home',  height_field='height', width_field='width', max_length=255);
+    width = models.IntegerField(editable=False)
+    height = models.IntegerField(editable=False)
+    
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        self.slug = slugify(self.image)
+        super(HomeImage, self).save(force_insert, force_update) 
+    
+    def __unicode__(self):
+        return self.slug
+
 
 class Media(models.Model):
     class Meta:

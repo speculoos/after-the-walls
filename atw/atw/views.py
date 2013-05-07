@@ -4,7 +4,7 @@ atw.views
 """
 
 from django.views.generic.base import TemplateView
-from django.http import 
+from django.http import HttpResponseBadRequest
 
 class HomePageView(TemplateView):
     template_name = "index.html"
@@ -17,7 +17,10 @@ class HomePageView(TemplateView):
         if self.request.user.is_authenticated():
             context['session'] = self.request.session
             context['user'] = self.request.user.username
-            context['key'] = self.request.user.api_key.key
+            try:
+                context['key'] = self.request.user.api_key.key
+            except Exception:
+                pass
         return context
         
         

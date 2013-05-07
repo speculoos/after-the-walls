@@ -2,13 +2,18 @@
 <html>
 
 <head>
-<title>{% block title %}After the walls{% endblock %}</title>
+<title>{% block title %}After the walls (UTOPIA/DYSTOPIA){% endblock %}</title>
 
 
 <script src="{{ STATIC_URL }}js/lib/jquery.js"></script>
 <script src="{{ STATIC_URL }}js/lib/underscore-min.js"></script>
 <script src="{{ STATIC_URL }}js/lib/backbone.js"></script>
 <script src="{{ STATIC_URL }}js/lib/template.js"></script>
+<script src="{{ STATIC_URL }}js/lib/jquery.backstretch.js"></script>
+
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}style/reset.less" />
+<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}style/style.less" />
+<script src="{{ STATIC_URL }}js/lib/less.js"></script>
 
 
 <script>
@@ -22,16 +27,14 @@ window.ATW = {
 </script>
 
 <script src="{{ STATIC_URL }}js/backbone_generic.js"></script>
+<script src="{{ STATIC_URL }}js/views.js"></script>
+<script src="{{ STATIC_URL }}js/router.js"></script>
+<script src="{{ STATIC_URL }}js/app.js"></script>
+<script src="{{ STATIC_URL }}js/index.js"></script>
 
 
 
 </head>
-
 <body>
-<h1>After the walls (UTOPIA/DYSTOPIA)</h1>
-<p>
-Soon.
-</p>
-
 </body>
 </html>
