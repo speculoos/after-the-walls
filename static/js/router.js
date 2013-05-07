@@ -15,27 +15,25 @@
             'contact': 'contact',
         },
         home:function(){
-            console.log('home');
-            if(ATW.Config.user_name === undefined)
-                app.setComponents('home login contact'.split(' '));
+            if(ATW.Config.user_name === 'AnonymousUser')
+                app.setComponents('home visit login contact'.split(' '));
             else
                 this.visit();
         },
         visit:function(){
-            console.log('visit');
             app.setComponents('episodes player login contact'.split(' '));
+            app.playDefault();
         },
         episode:function(id){
-            console.log('episode: '+id);
             app.setComponents('episodes player login contact'.split(' '));
             app.playEpisode(id);
         },
-//         register:function(){
-//             console.log('register');
-//         },
-//         contact:function(){
-//             console.log('contact');
-//         },
+        register:function(){
+            app.setComponents(['register']);
+        },
+        contact:function(){
+            app.setComponents(['contact']);
+        },
     });
     
     ATW.Router = Router;

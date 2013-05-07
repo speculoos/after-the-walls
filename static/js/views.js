@@ -8,26 +8,46 @@
     'strict';
     var ATW = window.ATW;
     
+    ATW.VisitWidget = Backbone.View.extend({
+        className:'visit-widget',
+        render:function(){
+            var $el = this.$el;
+            $el.empty();
+            Template.render('visit-widget', this, function(t){
+                $el.html(t({}));
+            });
+            return this;
+        },
+        events:{
+            'click' : 'visit'
+        },
+        visit:function(){
+            window.router.navigate('visit', {trigger: true});
+        }
+    });
+    
     ATW.LogWidget = Backbone.View.extend({
-        className:'log-widget widget',
-        initialize:function(isLogged){
-            this.isLogged = isLogged;
+        className:'log-widget',
+        initialize:function(){
         },
         render:function(){
             var $el = this.$el;
             $el.empty();
-            var data = {logged:ATW.Config.user_name !== undefined};
+            var data = {logged:app.isLogged()};
             Template.render('log-widget', this, function(t){
                 var h = t(data);
                 $el.html(h);
+                $el.find('.login-form').hide();
             });
             return this;
         },
-        open:function(){
-            
+        events:{
+            'click .login .title':  'toggle',
+            'click .login .submit': 'login',
+            'click .logout':        'logout',
         },
-        close:function(){
-            
+        toggle:function(){
+            this.$el.find('.login-form').toggle();
         },
         login:function(){
             
@@ -38,14 +58,13 @@
     });
     
     ATW.ContactWidget = Backbone.View.extend({
-        className:'contact-widget widget',
-        initialize:function(isLogged){
-            this.isLogged = isLogged;
+        className:'contact-widget',
+        initialize:function(){
         },
         render:function(){
             var $el = this.$el;
             $el.empty();
-            var data = {logged:this.isLogged};
+            var data = {logged:app.isLogged()};
             Template.render('contact-widget', this, function(t){
                 $el.html(t(data));
             });
@@ -63,7 +82,7 @@
     });
     
     ATW.RegisterWidget = Backbone.View.extend({
-        className:'register-widget widget',
+        className:'register-widget',
         initialize:function(isLogged){
             this.isLogged = isLogged;
         },
@@ -136,19 +155,7 @@
             this.player.jPlayer('play');
         },
         pause:function(){
-            
-        },
-        playHead:function(){
-            
-        },
-        louder:function(){
-            
-        },
-        softer:function(){
-            
-        },
-        mute:function(){
-            
+            this.player.jPlayer('pause');
         },
     });
 })();

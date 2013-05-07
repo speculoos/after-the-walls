@@ -8,7 +8,7 @@
 // Util.Template
 window.Template = {} || window.Template;
 window.Template = _.extend(window.Template,{
-    base_url: '/static/js/templates/',
+    base_url: '/templatejs/',
     cache: {},
     waiting: {},
     loading:{},
@@ -40,7 +40,7 @@ window.Template = _.extend(window.Template,{
                             }
                             else
                             {
-                                console.log('Failed on template: '+name);
+                                console.log('Failed on template: '+name+' ['+e+']');
                             }
                         }
                     }
@@ -60,7 +60,7 @@ window.Template = _.extend(window.Template,{
                 }
                 else
                 {
-                    console.log('Failed on template: '+name);
+                    console.log('Failed on template: '+name+' ['+e+']');
                 }
             }
         }

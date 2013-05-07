@@ -8,22 +8,9 @@
 (function(undefined){
     'strict';
     
-    var ImageProto = {
-        events:{
-            'click .previous':'previous',
-            'click .next':'next',
-        },
-        previous:function(evt){
-            this.trigger('previous');
-        },
-        next:function(evt){
-            this.trigger('next');
-        },
-    };
-    
     var EpisodeProto = {
         events:{
-            'click .title':'play',
+            'click':'play',
         },
         play:function(){
             window.router.navigate('episode/'+this.model.id, {trigger: true});
@@ -42,8 +29,6 @@
             this.backstretch = this.$el.data('backstretch');
         },
         renderOne:function(item){
-//             var i = new window.ATW.Views.homeimage({model:item});
-//             this.$el.append(i.render().el);
             if(this.backstretch === undefined)
                 this.initBack(item);
             else
@@ -67,10 +52,19 @@
             this.episodes = new window.ATW.Collections.episode;
             this.episodes.on('add', this.renderOne, this);
             this.episodes.on('reset', this.render, this);
+            this.items = {};
         },
         renderOne:function(item){
-            var i = new window.ATW.Views.episode({model:item});
-            this.$el.append(i.render().el);
+            if(this.items[item.cid] === undefined)
+            {
+                item.set({
+                    visited:false,
+                    current:false,
+                });
+                var i = new window.ATW.Views.episode({model:item});
+                this.$el.append(i.render().el);
+                this.items[item.cid] = i;
+            }
             return this;
         },
         render:function(){
@@ -88,7 +82,7 @@
         initialize:function(){
             this.components = {};
             window.ATW.Modeler(function(){
-                _.extend(window.ATW.Views.homeimage.prototype, ImageProto);
+//                 _.extend(window.ATW.Views.homeimage.prototype, ImageProto);
                 _.extend(window.ATW.Views.episode.prototype, EpisodeProto);
                 
                 this.medias = new ATW.Collections.media;
@@ -119,10 +113,20 @@
                     visible:false,
                     rendered: false,
                 };
+                this.components.visit = {
+                    view:new ATW.VisitWidget,
+                    visible:false,
+                    rendered: false,
+                };
+                this.components.contact = {
+                    view:new ATW.ContactWidget,
+                    visible:false,
+                    rendered: false,
+                };
+                
                 this.components.home.view.images.fetch();
                 this.components.episodes.view.episodes.fetch();
                 this.episodes = this.components.episodes.view.episodes;
-                
                 
                 this.trigger('ready');
             }, this);
@@ -159,11 +163,32 @@
             }
             this.render();
         },
+        isLogged:function(){
+            if(ATW.Config.user_name !== 'AnonymousUser')
+                return true;
+            return false;
+        },
+        playDefault:function(){
+            var item = this.episodes.at(0);
+            this.playEpisode(item.id);
+        },
         playEpisode:function(id){
             var item = this.episodes.get(id);
             var medias = item.get('medias');
             var media = this.medias.findWhere({resource_uri:medias[0]})
             this.components.player.view.loadMedia(media);
+            this.components.player.view.play();
+            item.set({
+                visited:true,
+                current:true,
+            });
+            if(this.current_episode !== undefined)
+            {
+                this.current_episode.set({
+                    current:false,
+                });
+            }
+            this.current_episode = item;
         }
     });
     

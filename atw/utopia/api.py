@@ -52,7 +52,7 @@ class MediaResource(ModelResource):
         
     def dehydrate_mime(self, bundle):
         T, ST = list(get_mime(bundle.obj.resource.file.name).split('/'))
-        print '%s %s/%s'%(bundle.obj.resource.file.name,T,ST)
+        #print '%s %s/%s'%(bundle.obj.resource.file.name,T,ST)
         if ST == 'webm':
             if T == 'video':
                 ST = 'webmv'

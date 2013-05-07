@@ -1,0 +1,22 @@
+<% if(logged){ %>
+<div class="logout">
+<span>logout</span>
+</div>
+<% }else{ %>
+<div class="login">
+    <span class="title">login</span>
+    <div class="login-form">
+        <p>
+        <div class="label">Identifiant</div>
+        <input type="text" class="input-id" val="" />
+        </p>
+        <p>
+        <div class="label">Mot de passe</div>
+        <input type="password" class="input-id" val="" />
+        </p>
+        <p>
+        <div class="submit">Valider</div>
+        </p>
+    </div>
+</div>
+<% } %>
