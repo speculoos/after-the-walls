@@ -14,10 +14,19 @@ from django.conf import settings
 
 from utopia.models import *
 
+from magic import Magic
+from os import path
+
+magic_mime = Magic(mime=True)
+def get_mime(fp):
+    ret = magic_mime.from_file(path.join(settings.MEDIA_ROOT, fp))
+    print '%s %s %s'%(settings.MEDIA_ROOT, fp, ret)
+    return ret
+
 models.signals.post_save.connect(create_api_key, sender=User)
 
 class EpisodeResource(ModelResource):
-    medias = fields.ToManyField('utopia.api.MediaResource', 'medias', null=True)
+    medias = fields.ToManyField(to='utopia.api.MediaResource', attribute='media_set', null=True)
 
     class Meta:
         always_return_data = True
@@ -31,14 +40,34 @@ class EpisodeResource(ModelResource):
    
 
 class MediaResource(ModelResource):
-    episode = fields.ToOneField(EpisodeResource, 'episodes')
-    
     class Meta:
         always_return_data = True
         queryset = Media.objects.all()
+        list_allowed_methods = ['get']
+        detail_allowed_methods = ['get']
+        authorization = DjangoAuthorization()
+        
+    episode = fields.ToOneField(to='utopia.api.EpisodeResource', attribute='episode', null=True, blank=True)
+    mime = fields.CharField()
+        
+    def dehydrate_mime(self, bundle):
+        T, ST = list(get_mime(bundle.obj.resource.file.name).split('/'))
+        print '%s %s/%s'%(bundle.obj.resource.file.name,T,ST)
+        if ST == 'webm':
+            if T == 'video':
+                ST = 'webmv'
+            else:
+                ST = 'webma'
+        if ST == 'ogg':
+            if T == 'audio':
+                ST = 'oga'
+            else:
+                ST = 'ogv'
+        return '/'.join([T,ST])
+        
         
 
-        
+
 class HomeImageResource(ModelResource):
     class Meta:
         always_return_data = True
@@ -47,8 +76,8 @@ class HomeImageResource(ModelResource):
         detail_allowed_methods = ['get']
         authorization = DjangoAuthorization()
         
-        def dehydrate_image(self, bundle):
-            return ''.join([settings.MEDIA_URL, bundle.obj.image.url])
+    def dehydrate_image(self, bundle):
+        return bundle.obj.image.url
             
         
         

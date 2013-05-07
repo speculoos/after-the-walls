@@ -24,7 +24,7 @@ window.Template = _.extend(window.Template,{
             if(this.loading[name] === undefined)
             {
                 this.loading[name] = true;
-                $.get(that.base_url+name+'.html', function(html){
+                $.get(that.base_url+name+'.html'+'?q='+Math.random(), function(html){
                     that.cache[name] = _.template(html);
                     for(var k = 0; k < that.waiting[name].length; k++)
                     {

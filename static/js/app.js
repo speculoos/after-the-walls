@@ -21,6 +21,15 @@
         },
     };
     
+    var EpisodeProto = {
+        events:{
+            'click .title':'play',
+        },
+        play:function(){
+            window.router.navigate('episode/'+this.model.id, {trigger: true});
+        },
+    };
+    
     var HomeView =  Backbone.View.extend({
         id:'galery',
         initialize:function(){
@@ -29,7 +38,7 @@
             this.images.on('reset', this.render, this);
         },
         initBack:function(item){
-            this.$el.backstretch(item.get('image'));
+            this.$el.backstretch(item.get('image'), {fade:'slow'});
             this.backstretch = this.$el.data('backstretch');
         },
         renderOne:function(item){
@@ -61,18 +70,14 @@
         },
         renderOne:function(item){
             var i = new window.ATW.Views.episode({model:item});
-            i.on('play', this.play, this);
             this.$el.append(i.render().el);
             return this;
         },
         render:function(){
-            this.images.each(function(item){
+            this.episodes.each(function(item){
                 this.renderOne(item);
             }, this);
             return this;
-        },
-        play:function(id){
-            console.log('play: '+id);
         },
     });
     
@@ -84,6 +89,10 @@
             this.components = {};
             window.ATW.Modeler(function(){
                 _.extend(window.ATW.Views.homeimage.prototype, ImageProto);
+                _.extend(window.ATW.Views.episode.prototype, EpisodeProto);
+                
+                this.medias = new ATW.Collections.media;
+                this.medias.fetch();
                 
                 this.components.home = {
                     view: new HomeView,
@@ -112,6 +121,8 @@
                 };
                 this.components.home.view.images.fetch();
                 this.components.episodes.view.episodes.fetch();
+                this.episodes = this.components.episodes.view.episodes;
+                
                 
                 this.trigger('ready');
             }, this);
@@ -148,6 +159,12 @@
             }
             this.render();
         },
+        playEpisode:function(id){
+            var item = this.episodes.get(id);
+            var medias = item.get('medias');
+            var media = this.medias.findWhere({resource_uri:medias[0]})
+            this.components.player.view.loadMedia(media);
+        }
     });
     
     window.ATW.AppView =  AppView;

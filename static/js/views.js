@@ -16,9 +16,10 @@
         render:function(){
             var $el = this.$el;
             $el.empty();
-            var data = {logged:this.isLogged};
+            var data = {logged:ATW.Config.user_name !== undefined};
             Template.render('log-widget', this, function(t){
-                $el.html(t(data));
+                var h = t(data);
+                $el.html(h);
             });
             return this;
         },
@@ -87,20 +88,52 @@
     });
     
     ATW.VideoPlayer = Backbone.View.extend({
-        className:'video-player',
+        id:'video-player',
         initialize:function(){
+            this.playerReady = false;
             
         },
         render:function(){
             var $el = this.$el;
             $el.empty();
             Template.render('video-player', this, function(t){
-                $el.html(t(data));
+                $el.html(t({}));
+                this.player = $el.find('.player');
+                this.controls = $el.find('.controls');
+                this.playerReady = true;
             });
             return this;
         },
-        play:function(){
+        loadMedia:function(item){
+            if(!this.playerReady)
+            {
+                var self = this;
+                window.setTimeout(function(){
+                    self.loadMedia(item);
+                }, 500);
+                return;
+            }
+            var $el = this.$el;
+            this.player.jPlayer("destroy");
+            var type = item.get('mime').split('/').pop();
+            var options = {
+                timeupdate: this.update.bind(this),
+                cssSelectorAncestor: '#'+$el.attr('id'),
+                errorAlerts: true,
+                warningAlerts: false,
+                swfPath: "./lib/Jplayer.swf",
+                supplied: type,
+            };
+            this.player.jPlayer(options);
+            var media = {};
+            media[type] = item.get('resource');
+            this.player.jPlayer('setMedia', media);
+        },
+        update:function(){
             
+        },
+        play:function(){
+            this.player.jPlayer('play');
         },
         pause:function(){
             

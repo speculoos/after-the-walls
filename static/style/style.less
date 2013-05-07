@@ -12,3 +12,56 @@
     right:0;
     bottom:0;
 }
+
+
+.widget{
+    position:absolute;
+    z-index:100;
+    padding:4px;
+    border:2px solid gray;
+    background-color:rgba(255,255,255,.5);
+    color:black;
+    font-family:sans-serif;
+    font-weight:bold;
+    font-size:12px;
+}
+
+
+#video-player{
+    .controls{
+        position:absolute;
+        bottom:10px;
+        left:30%;
+        right:30%;
+        text-align:center;
+        height:22px;
+        background-color:rgba(0,0,0,.5);
+        border:1px solid black;
+        padding:6px;
+        
+        span.control{
+            font-family:sans-serif;
+            font-weight:bold;
+            font-size:10px;
+            color:white;
+        }
+        
+        div.navigation{
+            position:relative;
+            bottom:3px;
+            
+            div.jp-seek-bar{
+                height:4px;
+                border:1px solid black;
+                div.jp-play-bar{
+                    height:4px;
+                    background-color:blue;
+                }
+            }
+        }
+    }
+    .player{
+        margin:auto;
+        width:600px;
+    }
+}
