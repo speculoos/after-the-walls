@@ -145,6 +145,19 @@
                 }
             }
         },
+        resetViews:function(comps){
+            for(var i=0; i<comps.length; i++)
+            {
+                var c = comps[i];
+                try{
+                    this.components[c].rendered = false;
+                }
+                catch(e){
+                    console.log('Could not reset: '+c);
+                }
+            }
+            this.render();
+        },
         setComponents:function(comps){
             for(var k in this.components){
                 var c = this.components[k];
@@ -164,7 +177,9 @@
             this.render();
         },
         isLogged:function(){
-            if(ATW.Config.user_name !== 'AnonymousUser')
+            if(ATW.Config.user_name !== 'AnonymousUser'
+                && ATW.Config.user_name !== undefined
+                && ATW.Config.api_key !== undefined )
                 return true;
             return false;
         },
@@ -176,8 +191,13 @@
             var item = this.episodes.get(id);
             var medias = item.get('medias');
             var media = this.medias.findWhere({resource_uri:medias[0]})
+            this.components.player.view.once(
+                'player:ready',
+                this.components.player.view.play, 
+                this.components.player.view
+            );
             this.components.player.view.loadMedia(media);
-            this.components.player.view.play();
+            
             item.set({
                 visited:true,
                 current:true,

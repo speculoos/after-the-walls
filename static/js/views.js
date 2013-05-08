@@ -49,11 +49,41 @@
         toggle:function(){
             this.$el.find('.login-form').toggle();
         },
+        _login_success:function(data){
+            if(data.error)
+            {
+                console.log('Login Error: '+data.error);
+                return;
+            }
+            ATW.Config.user_name = data.user;
+            ATW.Config.api_key = data.api_key;
+            app.resetViews(['login']);
+        },
         login:function(){
-            
+            var user = this.$el.find('input.user').val();
+            var key = this.$el.find('input.key').val();
+            $.ajax({
+                type: "POST",
+                url: '/login',
+                data: { user:user, key:key },
+                success: this._login_success.bind(this),
+                dataType: 'json'
+            });
+            this.toggle();
+        },
+        _logout_success:function(data){
+            ATW.Config.user_name = undefined;
+            ATW.Config.api_key = undefined;
+            app.resetViews(['login']);
         },
         logout:function(){
-            
+            $.ajax({
+                type: "POST",
+                url: '/logout',
+                data: {},
+                success: this._logout_success.bind(this),
+                   dataType: 'json'
+            });
         },
     });
     
@@ -67,14 +97,16 @@
             var data = {logged:app.isLogged()};
             Template.render('contact-widget', this, function(t){
                 $el.html(t(data));
+                $el.find('.form').hide();
             });
             return this;
         },
-        open:function(){
-            
+        events:{
+            'click .title':  'toggle',
+            'click .form .submit': 'send',
         },
-        close:function(){
-            
+        toggle:function(){
+            this.$el.find('.form').toggle();
         },
         send:function(){
             
@@ -109,7 +141,7 @@
     ATW.VideoPlayer = Backbone.View.extend({
         id:'video-player',
         initialize:function(){
-            this.playerReady = false;
+            this._playerRendered = false;
             
         },
         render:function(){
@@ -119,12 +151,12 @@
                 $el.html(t({}));
                 this.player = $el.find('.player');
                 this.controls = $el.find('.controls');
-                this.playerReady = true;
+                this._playerRendered = true;
             });
             return this;
         },
         loadMedia:function(item){
-            if(!this.playerReady)
+            if(!this._playerRendered)
             {
                 var self = this;
                 window.setTimeout(function(){
@@ -135,13 +167,18 @@
             var $el = this.$el;
             this.player.jPlayer("destroy");
             var type = item.get('mime').split('/').pop();
+            var self = this;
             var options = {
+                ready:function(){
+                    self.trigger('player:ready');
+                },
                 timeupdate: this.update.bind(this),
                 cssSelectorAncestor: '#'+$el.attr('id'),
                 errorAlerts: true,
                 warningAlerts: false,
                 swfPath: "./lib/Jplayer.swf",
                 supplied: type,
+                fullWindow:true,
             };
             this.player.jPlayer(options);
             var media = {};

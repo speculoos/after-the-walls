@@ -7,6 +7,9 @@ from atw.views import HomePageView
 
 urlpatterns = patterns('',
     url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^login$', 'atw.views.login', name='login'),
+    url(r'^logout$', 'atw.views.logout', name='logout'),
+    
     url(r'^u/', include('utopia.urls')),
     url(r'^templatejs/', include('templatejs.urls')),
     
