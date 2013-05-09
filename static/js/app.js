@@ -13,7 +13,7 @@
             'click':'play',
         },
         play:function(){
-            window.router.navigate('episode/'+this.model.id, {trigger: true});
+            window.router.navigate('episode/'+this.model.id);
         },
     };
     
@@ -128,6 +128,8 @@
                 this.components.episodes.view.episodes.fetch();
                 this.episodes = this.components.episodes.view.episodes;
                 
+                this.messages = new ATW.Collections.message;
+                
                 this.trigger('ready');
             }, this);
         },
@@ -189,6 +191,10 @@
         },
         playEpisode:function(id){
             var item = this.episodes.get(id);
+            if(item.get('medias'))
+                this.playMedia(item);
+        },
+        playMedia:function(item){
             var medias = item.get('medias');
             var media = this.medias.findWhere({resource_uri:medias[0]})
             this.components.player.view.once(
@@ -209,7 +215,14 @@
                 });
             }
             this.current_episode = item;
-        }
+        },
+        saveMessage:function(subject, body){
+            this.messages.create({
+                subject:subject,
+                body:body,
+                user:ATW.Config.user_pk,
+            });
+        },
     });
     
     window.ATW.AppView =  AppView;

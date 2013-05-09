@@ -5,8 +5,32 @@ utopia.models
 
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.conf import settings
 
 from adminsortable.models import Sortable
+
+class UserProfile(models.Model):
+    class Meta:
+        verbose_name = "Profil utilisateur"
+        verbose_name_plural = "Profils utilisateur"
+        
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='profile', verbose_name='Fou')
+    description = models.TextField(verbose_name='Corps', blank=True, null=True, default=None)
+    
+    def __unicode__(self):
+        return '%s <%s>'%(self.user.get_full_name(), self.user.email)
+
+class Message(models.Model):
+    class Meta:
+        verbose_name = "Message"
+        verbose_name_plural = "Messages"
+        
+    subject = models.SlugField(max_length=255, default='None')
+    body = models.TextField(verbose_name='Corps',blank=True, null=True, default=None)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Fou')
+    
+    def __unicode__(self):
+        return self.subject
 
 class HomeImage(Sortable):
     class Meta(Sortable.Meta):
@@ -34,8 +58,7 @@ class Media(models.Model):
         
     slug = models.SlugField(max_length=1024, editable=False, default='None')
     name = models.CharField(verbose_name='Dénomination', max_length=1024)
-    resource = models.FileField(upload_to='media', max_length=500) 
-    episode = models.ForeignKey('Episode', verbose_name='Épisode', blank=True, null=True, default=None)
+    resource = models.FileField(upload_to='media', max_length=500)
     
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -56,6 +79,7 @@ class Episode(models.Model):
     title = models.CharField(verbose_name='Titre', max_length=1024)
     body = models.TextField(verbose_name='Corps',blank=True, null=True, default=None)
     pub_date = models.DateField(blank=True, null=True, verbose_name='Date')
+    media = models.ForeignKey('Media', verbose_name='Media', blank=True, null=True, default=None)
     
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         self.slug = slugify(self.title)

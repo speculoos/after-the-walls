@@ -7,6 +7,6 @@ $(document).ready(function(){
     app.on('ready', function(){
         console.log('Application Ready');
         window.router = new ATW.Router;
-        Backbone.history.start({pushState: true});
+        Backbone.history.start({pushState: false});
     });
 });

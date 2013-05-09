@@ -6,10 +6,12 @@ utopia.api
 
 from tastypie import fields
 from tastypie.authorization import DjangoAuthorization
+from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
+from tastypie.models import create_api_key
+
 from django.contrib.auth.models import User
 from django.db import models
-from tastypie.models import create_api_key
 from django.conf import settings
 
 from utopia.models import *
@@ -25,8 +27,44 @@ def get_mime(fp):
 
 models.signals.post_save.connect(create_api_key, sender=User)
 
+class UserResource(ModelResource):
+    class Meta:
+        always_return_data = True
+        queryset = User.objects.all()
+        resource_name = 'user'
+        excludes = ['email', 'password', 'is_superuser']
+        # Add it here.
+        authentication = SessionAuthentication()
+        authorization = DjangoAuthorization()
+        list_allowed_methods = ['get']
+        detail_allowed_methods = ['get']
+
+class MessageResource(ModelResource):
+    user = fields.ToOneField(to='utopia.api.UserResource', attribute='user')
+    
+    def obj_create( self, bundle, **kwargs ):
+        #print bundle
+        u = User.objects.get(pk=bundle.data['user'])
+        bundle.data['user'] = u
+        super( MessageResource, self ).obj_create( bundle, **kwargs )
+        
+    def dehydrate_user(self, bundle):
+        return bundle.obj.user.pk
+        
+    def get_object_list(self, request):
+        return super(MessageResource, self).get_object_list(request).filter(user=request.user)
+
+    class Meta:
+        always_return_data = True
+        queryset = Message.objects.all()
+        resource_name = 'message'
+        list_allowed_methods = ['get','post']
+        detail_allowed_methods = ['get','post']
+        authentication = SessionAuthentication()
+        authorization = DjangoAuthorization()
+
 class EpisodeResource(ModelResource):
-    medias = fields.ToManyField(to='utopia.api.MediaResource', attribute='media_set', null=True)
+    media = fields.ToOneField(to='utopia.api.MediaResource', attribute='media', null=True, blank=True)
 
     class Meta:
         always_return_data = True
@@ -47,7 +85,6 @@ class MediaResource(ModelResource):
         detail_allowed_methods = ['get']
         authorization = DjangoAuthorization()
         
-    episode = fields.ToOneField(to='utopia.api.EpisodeResource', attribute='episode', null=True, blank=True)
     mime = fields.CharField()
         
     def dehydrate_mime(self, bundle):

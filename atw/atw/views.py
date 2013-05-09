@@ -25,6 +25,10 @@ class HomePageView(TemplateView):
         if self.request.user.is_authenticated():
             context['user'] = self.request.user.username
             try:
+                context['user_pk'] = self.request.user.id
+            except Exception:
+                pass
+            try:
                 context['key'] = self.request.user.api_key.key
             except Exception:
                 pass
@@ -43,7 +47,10 @@ def login(request):
     user = auth.authenticate(username=u, password=k)
     if user is not None and user.is_active:
             auth.login(request, user)
-            data = { 'user':user.username, }
+            data = { 
+            'user':user.username,
+            'user_pk':user.id
+            }
             
             try:
                 data['api_key'] = user.api_key.key

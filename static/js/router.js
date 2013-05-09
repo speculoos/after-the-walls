@@ -7,12 +7,15 @@
 
 (function(undefined){
     var Router =  Backbone.Router.extend({
+        navigate:function(route, options){
+            options = _.extend({trigger: true}, options);
+            Backbone.Router.prototype.navigate.apply(this, [route, options]);
+        },
         routes:{
             '': 'home',
             'visit': 'visit',
             'episode/:id': 'episode',
             'register': 'register',
-            'contact': 'contact',
         },
         home:function(){
             if(ATW.Config.user_name === 'AnonymousUser')
@@ -30,9 +33,6 @@
         },
         register:function(){
             app.setComponents(['register']);
-        },
-        contact:function(){
-            app.setComponents(['contact']);
         },
     });
     

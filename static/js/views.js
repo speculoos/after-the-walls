@@ -43,6 +43,7 @@
         },
         events:{
             'click .login .title':  'toggle',
+            'click .login .register':  'register',
             'click .login .submit': 'login',
             'click .logout':        'logout',
         },
@@ -57,7 +58,7 @@
             }
             ATW.Config.user_name = data.user;
             ATW.Config.api_key = data.api_key;
-            app.resetViews(['login']);
+            app.resetViews(['login','contact']);
         },
         login:function(){
             var user = this.$el.find('input.user').val();
@@ -74,7 +75,7 @@
         _logout_success:function(data){
             ATW.Config.user_name = undefined;
             ATW.Config.api_key = undefined;
-            app.resetViews(['login']);
+            app.resetViews(['login','contact']);
         },
         logout:function(){
             $.ajax({
@@ -85,6 +86,9 @@
                    dataType: 'json'
             });
         },
+        register:function(){
+            router.navigate('register');
+        }
     });
     
     ATW.ContactWidget = Backbone.View.extend({
@@ -109,32 +113,44 @@
             this.$el.find('.form').toggle();
         },
         send:function(){
-            
+            var subject = this.$el.find('input.subject').val();
+            var body = this.$el.find('textarea.text').val();
+            app.saveMessage(subject, body);
         },
     });
     
     ATW.RegisterWidget = Backbone.View.extend({
         className:'register-widget',
-        initialize:function(isLogged){
-            this.isLogged = isLogged;
+        initialize:function(){
         },
         render:function(){
             var $el = this.$el;
             $el.empty();
-            var data = {logged:this.isLogged};
+            var data = {logged:app.isLogged()};
             Template.render('register-widget', this, function(t){
                 $el.html(t(data));
             });
             return this;
         },
-        open:function(){
-            
+        events:{
+            'click .title':  'toggle',
+            'click .form .submit': 'send',
         },
-        close:function(){
-            
+        toggle:function(){
+            this.$el.find('.form').toggle();
         },
         send:function(){
-            
+            var name = this.$el.find('input.name').val();
+            var mail = this.$el.find('input.mail').val();
+            var description = this.$el.find('textarea.description').val();
+            $.ajax({
+                type: "POST",
+                url: '/login',
+                data: { name:name, mail:mail, description:description },
+                success: this._login_success.bind(this),
+                   dataType: 'json'
+            });
+            this.toggle();
         },
     });
     
