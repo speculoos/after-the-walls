@@ -1,0 +1,9 @@
+Welcome {{user.get_full_name}},
+
+Please confirm your registration by following this link:
+http://www.afterthewalls.com{% url 'atw.views.register_step_1' %}?user={{user.get_username}}&key={{user.api_key.key}}
+
+
+--
+After The Walls inc.
+

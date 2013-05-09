@@ -5,7 +5,11 @@ atw.views
 
 from django.views.generic.base import TemplateView
 from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest, HttpResponseServerError, HttpResponseRedirect
+from django.template.loader import render_to_string
+from django.core import serializers
+from django.template import RequestContext
+from django.shortcuts import get_object_or_404
 import json
 
 class HomePageView(TemplateView):
@@ -17,11 +21,7 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         session = self.request.session
-        #if session.get('salt') is None:
-            #import uuid
-            #session.['salt'] = str(uuid.uuid4())
         context['session'] = session
-        
         if self.request.user.is_authenticated():
             context['user'] = self.request.user.username
             try:
@@ -67,4 +67,57 @@ def logout(request):
     request.session.flush()
     auth.logout(request)
     return HttpResponse(json.dumps({'logout':'success'}), mimetype="application/json")
+    
+@csrf_protect
+def register_step_0(request):
+    name = request.POST.get('name', None)
+    email = request.POST.get('email', None)
+    from django.contrib import auth
+    
+    email = auth.models.User.objects.normalize_email(email)
+    u = auth.get_user_model()()
+    names = name.split(' ')
+    firstname = names.pop(0)
+    lastname = ' '.join(names)
+    try:
+        u.username = u.email = email
+        u.first_name = firstname
+        u.last_name = lastname
+        u.is_active = False
+        u.save()
+        ctx = RequestContext(request)
+        w_email = render_to_string('email_reg1.html', {'user':u}, ctx)
+        print w_email
+        u.email_user('After The Walls Registration', w_email)
+    except Exception as e:
+        return HttpResponseServerError(json.dumps({'error':str(e)}), mimetype="application/json")
+        
+    u_data = serializers.serialize("json", [u], fields=('email','first_name','last_name','username'))
+    data = json.loads(u_data)[0]
+    return HttpResponse(json.dumps(data), mimetype="application/json")
+    
+
+def register_step_1(request):
+    uname = request.GET.get('user', None)
+    key = request.GET.get('key', None)
+    print('RS1 (%s) (%s)'%(uname,key))
+    from django.contrib import auth
+    u = get_object_or_404(auth.get_user_model(), username=uname)
+    if key != u.api_key.key:
+        return HttpResponseForbidden('Wrong API_KEY')
+    
+    a_password = auth.models.User.objects.make_random_password()
+    u.set_password(a_password)
+    u.is_active = True
+    u.save()
+    
+    ctx = RequestContext(request)
+    w_email = render_to_string('email_welcome.html', {'user':u, 'password':a_password}, ctx)
+    print w_email
+    u.email_user('After The Walls Registration', w_email)
+    user = auth.authenticate(username=u.get_username(), password=a_password)
+    auth.login(request, user)
+    
+    return HttpResponseRedirect('/')
+    
     

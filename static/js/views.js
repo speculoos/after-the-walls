@@ -139,15 +139,18 @@
         toggle:function(){
             this.$el.find('.form').toggle();
         },
+        _register_success:function(data){
+            this.toggle();
+            console.log(data)
+        },
         send:function(){
             var name = this.$el.find('input.name').val();
             var mail = this.$el.find('input.mail').val();
-            var description = this.$el.find('textarea.description').val();
             $.ajax({
                 type: "POST",
-                url: '/login',
-                data: { name:name, mail:mail, description:description },
-                success: this._login_success.bind(this),
+                url: '/register_step_0',
+                data: { name:name, email:mail},
+                success: this._register_success.bind(this),
                    dataType: 'json'
             });
             this.toggle();
