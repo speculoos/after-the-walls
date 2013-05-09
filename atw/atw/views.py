@@ -102,13 +102,20 @@ def register_step_1(request):
     key = request.GET.get('key', None)
     print('RS1 (%s) (%s)'%(uname,key))
     from django.contrib import auth
+    from django.contrib.contenttypes.models import ContentType
+    from utopia.models import Message
+    
     u = get_object_or_404(auth.get_user_model(), username=uname)
     if key != u.api_key.key:
         return HttpResponseForbidden('Wrong API_KEY')
     
+    content_type = ContentType.objects.get_for_model(Message)
+    permission = auth.models.Permission.objects.get(content_type=content_type, codename='add_message')
     a_password = auth.models.User.objects.make_random_password()
+    
     u.set_password(a_password)
     u.is_active = True
+    u.user_permissions.add(permission)
     u.save()
     
     ctx = RequestContext(request)
