@@ -191,12 +191,12 @@
         },
         playEpisode:function(id){
             var item = this.episodes.get(id);
-            if(item.get('medias'))
+            if(item.get('media'))
                 this.playMedia(item);
         },
         playMedia:function(item){
-            var medias = item.get('medias');
-            var media = this.medias.findWhere({resource_uri:medias[0]})
+            var media_ref = item.get('media');
+            var media = this.medias.findWhere({resource_uri:media_ref});
             this.components.player.view.once(
                 'player:ready',
                 this.components.player.view.play, 

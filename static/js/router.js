@@ -18,8 +18,8 @@
             'register': 'register',
         },
         home:function(){
-            if(ATW.Config.user_name === 'AnonymousUser')
-                app.setComponents('home visit login contact'.split(' '));
+            if(!app.isLogged())
+                app.setComponents('home register visit login'.split(' '));
             else
                 this.visit();
         },
@@ -32,7 +32,7 @@
             app.playEpisode(id);
         },
         register:function(){
-            app.setComponents(['register']);
+            app.setComponents('home register'.split(' '));
         },
     });
     
