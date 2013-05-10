@@ -1,21 +1,23 @@
+{% load i18n %}
+
 <% if(logged){ %>
 <div class="logout">
-<span>logout</span>
+<span>Logout</span>
 </div>
 <% }else{ %>
 <div class="login row">
-<span class="title">login</span> or <span class="register">register</span>
+<span class="title">% trans "Login" %}</span>% trans " or " %}<span class="register">% trans "register" %}</span>
     <div class="login-form">
         <p>
-        <div class="label">User</div>
+        <div class="label">% trans "Username" %}</div>
         <input type="text" class="user"  />
         </p>
         <p>
-        <div class="label">Password</div>
+        <div class="label">% trans "Password" %}</div>
         <input type="password" class="key"  />
         </p>
         <p>
-        <div class="submit">Submit</div>
+        <div class="submit">% trans "Login" %}</div>
         </p>
     </div>
 </div>

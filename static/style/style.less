@@ -4,26 +4,36 @@
  * 
  */
 
-
-#galery{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
+body div p {
+  font-family: 'Gentium Basic', serif;
 }
-
 
 .widget{
     position:absolute;
     z-index:100;
-    padding:4px;
-    border:2px solid gray;
-    background-color:rgba(255,255,255,.5);
-    color:black;
-    font-family:sans-serif;
-    font-weight:bold;
-    font-size:12px;
+    padding:0px;
+    //border:2px solid gray;
+    //background-color:rgba(255,255,255,.5);
+    color:white;
+    font-size:15px;
+    line-height:19px;
+}
+
+.register-widget{
+    .widget;
+    top:140px;
+    right:25%;
+    width:50%;
+}
+
+.blockleft{
+    float:left;
+    width:50%;
+}
+
+.blockright{
+    float:right;
+    width:50%;
 }
 
 .log-widget{
@@ -40,13 +50,6 @@
     }
 }
 
-.visit-widget{
-    .widget;
-    top:80px;
-    right:20px;
-    cursor:pointer;
-}
-
 .contact-widget{
     .widget;
     top:120px;
@@ -61,10 +64,12 @@
     }
 }
 
-.register-widget{
+.visit-widget{
     .widget;
-    top:200px;
+    top:80px;
     right:20px;
+    cursor:pointer;
+    display:none;
 }
 
 #episodes{
@@ -117,4 +122,12 @@
         margin:auto;
         width:600px;
     }
+}
+
+#galery{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
 }

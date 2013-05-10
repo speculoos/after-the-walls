@@ -1,14 +1,41 @@
-<div class="title">register</div>
+{% load i18n %}
+
+<div class="blockleft">
+<div class="message">
+<p>{% trans "Welcome everyone." %}</p>
+<p>{% trans "If you are new or have never come to one of my talks, my name is Bernard Loizeau and I am inviting you to join a community of knowledge and expertise, brought together to create a utopia:" %}</p>
+<p>{% trans "The future of all of us, and the way in which it will be explained through our future homes." %}</p>
+<p>{% trans "In this new community, each of you has a place and a role to play. What are you waiting for? Come and join me!" %}</p>
+<p>{% trans "If you would not like to join the community, you can merely observe our interviews. There will always be time for you to join us later." %}</p>
+<p>{% trans "Come on in, don’t be afraid! The only thing that we have to fear is that, at worst, it works!" %}</p>
+<p>Bernard Loizeau</p>
+</div>
+</div>
+
+<div class="blockright">
 <div class="form">
+    <p class="headline">{% trans "Join the community" %}</p>
+    </div>
     <div class="block">
-    <p>name</p>
+    <p>{% trans "Enter your name" %}</p>
     <input type="text" class="name" />
     </div>
     <div class="block">
-    <p>e-mail</p>
+    <p>{% trans "Enter your email address" %}</p>
     <input type="text" class="mail" />
     </div>
     <div class="block">
-    <span  class="submit">submit</span>
+    <span class="submit">{% trans "Join" %}</span>
+    </div>
+    <div class="answer">
+    <p>{% trans "Thank you for registering." %}</p>
+    <p>{% trans "An email has just been sent to you. To confirm your registration, please click on the link in the email." %}</p>
     </div>
 </div>
+
+<div class="alternate">
+    <p class="headline">{% trans "Continue as an observer" %}</p>
+</div>
+</div>
+
+
