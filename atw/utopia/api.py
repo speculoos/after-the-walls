@@ -41,14 +41,14 @@ class UserResource(ModelResource):
         detail_allowed_methods = ['get', 'post']
         
     def get_object_list(self, request):
-        return super(UserResource, self).get_object_list(request).filter(pk=request.user)
+        return super(UserResource, self).get_object_list(request).filter(pk=request.user.pk)
         
 class UserProfileResource(ModelResource):
     user = fields.ToOneField(to='utopia.api.UserResource', attribute='user')
     
     class Meta:
         always_return_data = True
-        queryset = User.objects.all()
+        queryset = UserProfile.objects.all()
         resource_name = 'userprofile'
         excludes = ['email', 'password', 'is_superuser']
         # Add it here.
@@ -61,8 +61,9 @@ class UserProfileResource(ModelResource):
         return bundle.obj.user.pk
         
     def get_object_list(self, request):
-        print request
-        return super(UserProfileResource, self).get_object_list(request).filter(user__pk=request.user)
+        q = super(UserProfileResource, self).get_object_list(request)
+        fq = q.filter(user=request.user)
+        return fq
 
 class MessageResource(ModelResource):
     user = fields.ToOneField(to='utopia.api.UserResource', attribute='user')

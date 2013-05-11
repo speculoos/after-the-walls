@@ -4,14 +4,16 @@
  * 
  */
 
-<<<<<<< HEAD
 body{
     background-color:black;
 }
 
-body div p span a h4{
+*{
   font-family: 'Gentium Basic', serif;
 }
+
+@bg_dark_tr:rgba(0,0,0,.5);
+@bg_light_tr:rgba(255,255,255,.5);
 
 .widget{
     position:absolute;
@@ -24,28 +26,18 @@ body div p span a h4{
     line-height:19px;
 }
 
-.register-widget{
-    .widget;
-    bottom:60px;
-    right:25%;
-    width:50%;
+@color_link:#666;
+@color_link_hover:#1f4c7a;
+.link{
+    color:@color_link;
+    font-weight:bold;
+    cursor:pointer;
+    &:hover{
+        color:@color_link_hover;
+        border-bottom:1px solid;
+    }
 }
 
-.blockleft{
-    float:left;
-    width:45%;
-    padding:10px;
-}
-
-.blockright{
-    float:right;
-    width:45%;
-    padding:10px;
-}
-
-.visit {
-    margin-top:0px;
-}
 
 .log-widget{
     .widget;
@@ -135,6 +127,17 @@ body div p span a h4{
     }
 }
 
+.hero-unit{
+    position:relative;
+    margin:auto;
+    top:200px;
+    width:60%;
+    max-width:740px;
+    color:white;
+    background-color:@bg_dark_tr;
+    line-height: 120%;
+}
+
 .html-proxy{
     position:absolute;
     top:0;
@@ -142,9 +145,43 @@ body div p span a h4{
     right:0;
     bottom:0;
     .html-widget{
-       
+        .hero-unit;
     }
 }
+
+
+.register-widget{
+    .hero-unit;
+    padding:20px;
+    .blockleft{
+        float:left;
+        width:45%;
+        padding:10px;
+/*         border-right:1px solid white; */
+    }
+    
+    .blockright{
+        float:right;
+        width:45%;
+        padding:10px;
+        text-align:center;
+    }
+    
+    .visit {
+        margin-top:0px;
+    }
+    
+    .message{
+        font-size:80%;
+    }
+    .form{
+        padding-top:32px;
+        .block{
+            padding:12px 0;
+        }
+    }
+}
+
 #galery{
     position:absolute;
     top:0;

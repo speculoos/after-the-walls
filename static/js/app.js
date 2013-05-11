@@ -96,8 +96,10 @@
             this.currentView = undefined;
         },
         render:function(){
+            this.$el.empty();
             if(this.currentView)
             {
+                this.currentView.$el.addClass('hero-unit');
                 this.$el.append(this.currentView.render().el)
             }
             return this;
@@ -118,6 +120,18 @@
             window.ATW.Modeler(function(){
 //                 _.extend(window.ATW.Views.homeimage.prototype, ImageProto);
                 _.extend(window.ATW.Views.episode.prototype, EpisodeProto);
+                
+                this.profiles = new ATW.Collections.userprofile;
+                var self = this;
+                this.profiles.on('reset', function(){
+                    if(self.profiles.length > 0)
+                    {
+                        self.registerComponent('profile', new ATW.Views.userprofile({
+                            model:self.profiles.at(0),
+                        }));
+                    }
+                });
+                this.profiles.fetch({reset:true});
                 
                 this.medias = new ATW.Collections.media;
                 this.medias.fetch();

@@ -24,7 +24,11 @@
             if(this.model.get('bg_image'))
             {
                 if(this.proxyView)
+                {
+                    if(this.proxyView.$el.data('backstretch') !== undefined)
+                        this.proxyView.$el.data('backstretch').destroy();
                     this.proxyView.$el.backstretch(this.model.get('bg_image'));
+                }
                 else
                     this.$el.backstretch(this.model.get('bg_image'));
             }
@@ -126,7 +130,7 @@
     });
     
     ATW.RegisterWidget = Backbone.View.extend({
-        className:'register-widget',
+        className:'register-widget hero-unit',
         initialize:function(){
         },
         render:function(){
