@@ -18,6 +18,7 @@ from utopia.models import *
 
 from magic import Magic
 from os import path
+import markdown2 as md
 
 magic_mime = Magic(mime=True)
 def get_mime(fp):
@@ -75,7 +76,12 @@ class EpisodeResource(ModelResource):
         detail_allowed_methods = ['get']
         authorization = DjangoAuthorization()
    
-   
+    def dehydrate_body(self, bundle):
+        try:
+            return md.markdown(bundle.obj.body)
+        except Exception:
+            pass
+        return ''
 
 class MediaResource(ModelResource):
     class Meta:

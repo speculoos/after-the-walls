@@ -129,19 +129,18 @@
             var data = {logged:app.isLogged()};
             Template.render('register-widget', this, function(t){
                 $el.html(t(data));
+                $el.find('.answer').hide();
             });
             return this;
         },
         events:{
-            'click .title':  'toggle',
             'click .form .submit': 'send',
         },
-        toggle:function(){
-            this.$el.find('.form').toggle();
-        },
         _register_success:function(data){
-            this.toggle();
-            console.log(data)
+            var form = this.$el.find('.form');
+            var success = this.$el.find('.answer');
+            form.empty().append(success);
+            success.show();
         },
         send:function(){
             var name = this.$el.find('input.name').val();

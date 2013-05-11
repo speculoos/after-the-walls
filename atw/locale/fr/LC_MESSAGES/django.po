@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-11 02:01-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: atw/local_settings.py:8
+msgid "English"
+msgstr ""
+
+#: atw/local_settings.py:9
+msgid "French"
+msgstr ""
+
+#: templatejs/templates/register-widget.html:5
+msgid "Welcome everyone."
+msgstr ""
+
+#: templatejs/templates/register-widget.html:6
+msgid ""
+"If you are new or have never come to one of my talks, my name is Bernard "
+"Loizeau and I am inviting you to join a community of knowledge and "
+"expertise, brought together to create a utopia:"
+msgstr ""
+
+#: templatejs/templates/register-widget.html:7
+msgid ""
+"The future of all of us, and the way in which it will be explained through "
+"our future homes."
+msgstr ""
+
+#: templatejs/templates/register-widget.html:8
+msgid ""
+"In this new community, each of you has a place and a role to play. What are "
+"you waiting for? Come and join me!"
+msgstr ""
+
+#: templatejs/templates/register-widget.html:9
+msgid ""
+"If you would not like to join the community, you can merely observe our "
+"interviews. There will always be time for you to join us later."
+msgstr ""
+
+#: templatejs/templates/register-widget.html:10
+msgid ""
+"Come on in, don’t be afraid! The only thing that we have to fear is that, at "
+"worst, it works!"
+msgstr ""
+
+#: templatejs/templates/register-widget.html:17
+msgid "Join the community"
+msgstr ""
+
+#: templatejs/templates/register-widget.html:20
+msgid "Enter your name"
+msgstr ""
+
+#: templatejs/templates/register-widget.html:24
+msgid "Enter your email address"
+msgstr ""
+
+#: templatejs/templates/register-widget.html:28
+msgid "Join"
+msgstr ""
+
+#: templatejs/templates/register-widget.html:33
+msgid "Thank you for registering."
+msgstr ""
+
+#: templatejs/templates/register-widget.html:34
+msgid ""
+"An email has just been sent to you. To confirm your registration, please "
+"click on the link in the email."
+msgstr ""
+
+#: templatejs/templates/register-widget.html:38
+msgid "Continue as an observer"
+msgstr ""

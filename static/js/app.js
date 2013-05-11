@@ -21,14 +21,29 @@
         id:'galery',
         initialize:function(){
             this.images = new window.ATW.Collections.homeimage;
+            this.cache = {};
             this.images.on('add', this.renderOne, this);
             this.images.on('reset', this.render, this);
         },
         initBack:function(item){
-            this.$el.backstretch(item.get('image'), {fade:'slow'});
+            this.$el.backstretch(item.get('image'), {fade:item.get('fade', 1000)});
             this.backstretch = this.$el.data('backstretch');
         },
+        cacheImage:function(item){
+            if(this.cache[item.id] !== undefined)
+            {
+                return;
+            }
+            var src = item.get('image');
+            var img = new Image;
+            img.src = src;
+            this.cache[item.id] = img;
+            $(img).on('load',function(){
+                console.log('L: '+src);
+            });
+        },
         renderOne:function(item){
+            this.cacheImage(item);
             if(this.backstretch === undefined)
                 this.initBack(item);
             else
@@ -88,41 +103,12 @@
                 this.medias = new ATW.Collections.media;
                 this.medias.fetch();
                 
-                this.components.home = {
-                    view: new HomeView,
-                    visible: false,
-                    rendered: false,
-                };
-                this.components.episodes = {
-                    view:new EpisodeCollectionView,
-                    visible:false,
-                    rendered: false,
-                };
-                this.components.login = {
-                    view:new ATW.LogWidget,
-                    visible:false,
-                    rendered: false,
-                };
-                this.components.register = {
-                    view:new ATW.RegisterWidget,
-                    visible:false,
-                    rendered: false,
-                };
-                this.components.player = {
-                    view:new ATW.VideoPlayer,
-                    visible:false,
-                    rendered: false,
-                };
-                this.components.visit = {
-                    view:new ATW.VisitWidget,
-                    visible:false,
-                    rendered: false,
-                };
-                this.components.contact = {
-                    view:new ATW.ContactWidget,
-                    visible:false,
-                    rendered: false,
-                };
+                this.registerComponent('home', new HomeView);
+                this.registerComponent('episodes', new EpisodeCollectionView);
+                this.registerComponent('login', new ATW.LogWidget);
+                this.registerComponent('register', new ATW.RegisterWidget);
+                this.registerComponent('player', new ATW.VideoPlayer);
+                this.registerComponent('contact', new ATW.ContactWidget);
                 
                 this.components.home.view.images.fetch();
                 this.components.episodes.view.episodes.fetch();
@@ -132,6 +118,17 @@
                 
                 this.trigger('ready');
             }, this);
+        },
+        registerComponent: function(name, view){
+            if(this.components === undefined)
+            {
+                this.components = {};
+            }
+            this.components[name] = {
+                view:view,
+                visible:false,
+                rendered: false,
+            }
         },
         render:function(){
             for(var k in this.components){
