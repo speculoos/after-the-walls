@@ -21,14 +21,29 @@
         id:'galery',
         initialize:function(){
             this.images = new window.ATW.Collections.homeimage;
+            this.cache = {};
             this.images.on('add', this.renderOne, this);
             this.images.on('reset', this.render, this);
         },
         initBack:function(item){
-            this.$el.backstretch(item.get('image'), {fade:'slow'});
+            this.$el.backstretch(item.get('image'), {fade:item.get('fade', 1000)});
             this.backstretch = this.$el.data('backstretch');
         },
+        cacheImage:function(item){
+            if(this.cache[item.id] !== undefined)
+            {
+                return;
+            }
+            var src = item.get('image');
+            var img = new Image;
+            img.src = src;
+            this.cache[item.id] = img;
+            $(img).on('load',function(){
+                console.log('L: '+src);
+            });
+        },
         renderOne:function(item){
+            this.cacheImage(item);
             if(this.backstretch === undefined)
                 this.initBack(item);
             else
