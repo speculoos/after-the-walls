@@ -138,7 +138,6 @@
                 success: this._register_success.bind(this),
                    dataType: 'json'
             });
-            this.toggle();
         },
     });
     
