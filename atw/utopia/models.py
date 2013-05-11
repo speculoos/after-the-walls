@@ -81,6 +81,20 @@ class Episode(models.Model):
     pub_date = models.DateField(blank=True, null=True, verbose_name='Date')
     media = models.ForeignKey('Media', verbose_name='Media', blank=True, null=True, default=None)
     
+    bg_image = models.ImageField(upload_to='episode_bg', 
+                                verbose_name='Image de fond',  
+                                height_field='bg_height', 
+                                width_field='bg_width', 
+                                max_length=255,
+                                blank=True, null=True, default=None);
+    bg_width = models.IntegerField(editable=False, blank=True, null=True, default=None)
+    bg_height = models.IntegerField(editable=False, blank=True, null=True, default=None)
+    
+    bg_track = models.FileField(upload_to='episode_bgt', 
+                                    verbose_name='Musique de fond', 
+                                    max_length=255,
+                                    blank=True, null=True, default=None);
+    
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Episode, self).save(force_insert, force_update) 
