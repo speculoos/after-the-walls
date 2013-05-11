@@ -40,9 +40,16 @@
             app.setComponents('profile'.split(' '));
         },
         logout:function(){
+            $.ajax({
+                type: "GET",
+                url: '/logout',
+                data: {  },
+                dataType: 'json'
+            });
             ATW.Config.user_name = undefined;
             ATW.Config.api_key = undefined;
             app.resetViews(['login','contact']);
+            this.navigate('visit');
         },
     });
     
