@@ -23,7 +23,10 @@
             this.$el.html(this.model.get('body'));
             if(this.model.get('bg_image'))
             {
-                this.$el.backstretch(this.model.get('bg_image'));
+                if(this.proxyView)
+                    this.proxyView.$el.backstretch(this.model.get('bg_image'));
+                else
+                    this.$el.backstretch(this.model.get('bg_image'));
             }
             return this;
         },

@@ -104,6 +104,7 @@
         },
         setView:function(view){
             this.currentView = view;
+            view.proxyView = this; 
             return this.render();
         }
     });
@@ -218,7 +219,12 @@
         },
         playDefault:function(){
             var item = this.episodes.at(0);
-            this.playEpisode(item.id);
+            if(item === undefined)
+            {
+                window.setTimeout(this.playDefault.bind(this), 500);
+            }
+            else
+                this.playEpisode(item.id);
         },
         playEpisode:function(id){
             var item = this.episodes.get(id);
