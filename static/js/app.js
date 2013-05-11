@@ -90,6 +90,25 @@
         },
     });
     
+    var HTMLProxyView = Backbone.View.extend({
+        className:'html-proxy',
+        initialize:function(){
+            this.currentView = undefined;
+        },
+        render:function(){
+            if(this.currentView)
+            {
+                this.$el.append(this.currentView.render().el)
+            }
+            return this;
+        },
+        setView:function(view){
+            this.currentView = view;
+            view.proxyView = this; 
+            return this.render();
+        }
+    });
+    
     
     
     var AppView =  Backbone.View.extend({
@@ -109,6 +128,7 @@
                 this.registerComponent('register', new ATW.RegisterWidget);
                 this.registerComponent('player', new ATW.VideoPlayer);
                 this.registerComponent('contact', new ATW.ContactWidget);
+                this.registerComponent('html', new HTMLProxyView);
                 
                 this.components.home.view.images.fetch();
                 this.components.episodes.view.episodes.fetch();
@@ -142,6 +162,10 @@
                         c.rendered = true;
                     }
                 }
+                else
+                {
+                    c.view.$el.detach();
+                }
             }
         },
         resetViews:function(comps){
@@ -158,6 +182,7 @@
             this.render();
         },
         setComponents:function(comps){
+            this.current_comps = comps;
             for(var k in this.components){
                 var c = this.components[k];
                 c.visible = false;
@@ -175,6 +200,16 @@
             }
             this.render();
         },
+        unsetComponent:function(comp){
+            if(this.components[comp] === undefined)
+                return;
+            this.components[comp].visible = false;
+        },
+        setComponent:function(comp){
+            if(this.components[comp] === undefined)
+                return;
+            this.components[comp].visible = true;
+        },
         isLogged:function(){
             if(ATW.Config.user_name !== 'AnonymousUser'
                 && ATW.Config.user_name !== undefined
@@ -184,12 +219,27 @@
         },
         playDefault:function(){
             var item = this.episodes.at(0);
-            this.playEpisode(item.id);
+            if(item === undefined)
+            {
+                window.setTimeout(this.playDefault.bind(this), 500);
+            }
+            else
+                this.playEpisode(item.id);
         },
         playEpisode:function(id){
             var item = this.episodes.get(id);
             if(item.get('media'))
                 this.playMedia(item);
+            else
+                this.displayEpisode(item);
+        },
+        displayEpisode:function(item){
+            this.unsetComponent('player');
+            this.setComponent('html', true);
+            this.components.html.view.setView(
+                new ATW.HTMLEpisodeview({model:item})
+            );
+            this.render();
         },
         playMedia:function(item){
             var media_ref = item.get('media');

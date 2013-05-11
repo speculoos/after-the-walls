@@ -8,22 +8,28 @@
     'strict';
     var ATW = window.ATW;
     
-    ATW.VisitWidget = Backbone.View.extend({
-        className:'visit-widget',
+    ATW.HTMLEpisodeview = Backbone.View.extend({
+        className:'html-widget',
+        initialize:function(){
+            
+        },
         render:function(){
             var $el = this.$el;
             $el.empty();
-            Template.render('visit-widget', this, function(t){
-                $el.html(t({}));
-            });
+//             var data = this.model.toJSON();
+//             Template.render('html-widget', this, function(t){
+//                 $el.html(t(data));
+            //             });
+            this.$el.html(this.model.get('body'));
+            if(this.model.get('bg_image'))
+            {
+                if(this.proxyView)
+                    this.proxyView.$el.backstretch(this.model.get('bg_image'));
+                else
+                    this.$el.backstretch(this.model.get('bg_image'));
+            }
             return this;
         },
-        events:{
-            'click' : 'visit'
-        },
-        visit:function(){
-            window.router.navigate('visit', {trigger: true});
-        }
     });
     
     ATW.LogWidget = Backbone.View.extend({
