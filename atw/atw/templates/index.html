@@ -1,5 +1,8 @@
-<!DOCTYPE html>
-<html>
+{% load i18n %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{LANGUAGE_CODE}}">
 
 <head>
 <title>{% block title %}After the walls (UTOPIA/DYSTOPIA){% endblock %}</title>

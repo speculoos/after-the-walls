@@ -7,10 +7,20 @@
 <% }else{ %>
 <div class="login form-inline">
     <div class="login-form">
+    
         <input type="text" class="user input-mini" placeholder="{% trans "Username" %}"  />
         <input type="password" class="key input-mini" placeholder="{% trans "Password" %}"  />
         <button class="btn submit">{% trans "Sign in" %}</button>
         <span class="link" data-src="register">{% trans "register" %}</span>
+        
+        {%if LANGUAGE_CODE == 'fr' %}
+        <button class="link" data-src="setlang/en">En</button>
+        {% else %}
+        <button class="link" data-src="setlang/fr">Fr</button>
+        {% endif %}
     </div>
 </div>
+
+
+
 <% } %>

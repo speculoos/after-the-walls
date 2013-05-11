@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-11 12:16-0500\n"
+"POT-Creation-Date: 2013-05-11 13:51-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Pierre Marchand <pierremarc07@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgid "You're not registered yet. Please "
 msgstr "Vous n'êtes pas encore enregistré."
 
 #: templatejs/templates/contact-widget.html:19
-#: templatejs/templates/log-widget.html:13
+#: templatejs/templates/log-widget.html:14
 msgid "register"
 msgstr "Enregistrez vous"
 
@@ -55,39 +55,39 @@ msgstr "Enregistrez vous"
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: templatejs/templates/log-widget.html:10
+#: templatejs/templates/log-widget.html:11
 msgid "Username"
 msgstr "Utilisateur"
 
-#: templatejs/templates/log-widget.html:11
+#: templatejs/templates/log-widget.html:12
 msgid "Password"
 msgstr "Mot de passe"
 
-#: templatejs/templates/log-widget.html:12
+#: templatejs/templates/log-widget.html:13
 msgid "Sign in"
 msgstr "Connexion"
 
-#: templatejs/templates/register-widget.html:4
+#: templatejs/templates/register-widget.html:5
 msgid "Join the community"
 msgstr "Rejoignez la communauté"
 
-#: templatejs/templates/register-widget.html:6
+#: templatejs/templates/register-widget.html:7
 msgid "Your name"
 msgstr "Votre nom"
 
-#: templatejs/templates/register-widget.html:7
+#: templatejs/templates/register-widget.html:8
 msgid "Your email address"
 msgstr "Votre addresse électronique"
 
-#: templatejs/templates/register-widget.html:9
+#: templatejs/templates/register-widget.html:10
 msgid "Join"
 msgstr "Rejoindre"
 
-#: templatejs/templates/register-widget.html:14
+#: templatejs/templates/register-widget.html:15
 msgid "Thank you for registering."
 msgstr "Merci pour votre inscription."
 
-#: templatejs/templates/register-widget.html:15
+#: templatejs/templates/register-widget.html:16
 msgid ""
 "An email has just been sent to you. To confirm your registration, please "
 "click on the link in the email."
@@ -95,15 +95,15 @@ msgstr ""
 "Un email vient de vous être envoyé. Pour confirmer votre inscription,"
 "veuillez cliquer sur le lien que vous y trouverez. "
 
-#: templatejs/templates/register-widget.html:20
+#: templatejs/templates/register-widget.html:21
 msgid "continue as an observer"
 msgstr "Continuer comme observateur"
 
-#: templatejs/templates/register-widget.html:28
+#: templatejs/templates/register-widget.html:29
 msgid "Welcome everyone"
 msgstr "Bienvenue à tous"
 
-#: templatejs/templates/register-widget.html:29
+#: templatejs/templates/register-widget.html:30
 msgid ""
 "If you are new or have never come to one of my talks, my name is Bernard "
 "Loizeau and I am inviting you to join a community of knowledge and "
@@ -114,7 +114,7 @@ msgstr ""
 "rejoindre une communauté de savoir et de compétences au service d’une "
 "utopie : "
 
-#: templatejs/templates/register-widget.html:30
+#: templatejs/templates/register-widget.html:31
 msgid ""
 "The future of all of us, and the way in which it will be explained through "
 "our future homes."
@@ -122,7 +122,7 @@ msgstr ""
 "Notre devenir à tous et la façon dont il s’exprimera au travers de nos "
 "futures habitations."
 
-#: templatejs/templates/register-widget.html:31
+#: templatejs/templates/register-widget.html:32
 msgid ""
 "In this new community, each of you has a place and a role to play. What are "
 "you waiting for? Come and join me!"
@@ -130,7 +130,7 @@ msgstr ""
 "Dans cette nouvelle communauté, chacun de vous a une place à prendre, un "
 "rôle à jouer. N’attendez plus, et rejoignez-moi!"
 
-#: templatejs/templates/register-widget.html:32
+#: templatejs/templates/register-widget.html:33
 msgid ""
 "If you would not like to join the community, you can merely observe our "
 "interviews. There will always be time for you to join us later."
@@ -139,7 +139,7 @@ msgstr ""
 "rester simple observateur de nos entrevues. Il sera toujours temps de nous "
 "rejoindre plus tard. "
 
-#: templatejs/templates/register-widget.html:33
+#: templatejs/templates/register-widget.html:34
 msgid ""
 "Come on in, don’t be afraid! The only thing that we have to fear is that, at "
 "worst, it works!"
@@ -262,35 +262,3 @@ msgstr ""
 msgid "Continue as an observer"
 msgstr "Continuer comme observateur"
 
-#~ msgid "Profiles sought"
-#~ msgstr "Profil recherchés"
-
-#~ msgid "Mathematician"
-#~ msgstr "Mathématicien"
-
-#~ msgid "Engineer"
-#~ msgstr "Ingénieur"
-
-#~ msgid "Secretary"
-#~ msgstr "Secrétaire"
-
-#~ msgid "Builder"
-#~ msgstr "Maçon"
-
-#~ msgid "IT"
-#~ msgstr "Informaticien"
-
-#~ msgid "Logistics"
-#~ msgstr "Intendant logistique"
-
-#~ msgid "Designer or cartographer"
-#~ msgstr "Dessinateur ou cartographe"
-
-#~ msgid "Psychologist or psychiatrist"
-#~ msgstr "Psychologue ou psychiatre"
-
-#~ msgid "Geologist"
-#~ msgstr "Géologue"
-
-#~ msgid "Anthropologist"
-#~ msgstr "Anthropologue"

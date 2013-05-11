@@ -7,6 +7,7 @@ from atw.views import HomePageView
 
 urlpatterns = patterns('',
     url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^login$', 'atw.views.login', name='login'),
     url(r'^logout$', 'atw.views.logout', name='logout'),
     

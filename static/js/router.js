@@ -18,6 +18,7 @@
             'register': 'register',
             'profile' : 'profile',
             'logout': 'logout',
+            'setlang/:code':'setlang',
         },
         home:function(){
             if(!app.isLogged())
@@ -50,6 +51,18 @@
             ATW.Config.api_key = undefined;
             app.resetViews(['login','contact']);
             this.navigate('visit');
+        },
+        setlang:function(code){
+            var self = this;
+            $.ajax({
+                type: "POST",
+                url: '/i18n/setlang/',
+                data: { language:code },
+//                    dataType: 'json'
+            });
+            var href = window.location.href;
+            var baseloc= href.protocol + '//'+ href.host
+            href = baseloc;
         },
     });
     
