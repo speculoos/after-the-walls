@@ -38,7 +38,31 @@ class UserResource(ModelResource):
         authentication = SessionAuthentication()
         authorization = DjangoAuthorization()
         list_allowed_methods = ['get']
+        detail_allowed_methods = ['get', 'post']
+        
+    def get_object_list(self, request):
+        return super(UserResource, self).get_object_list(request).filter(pk=request.user)
+        
+class UserProfileResource(ModelResource):
+    user = fields.ToOneField(to='utopia.api.UserResource', attribute='user')
+    
+    class Meta:
+        always_return_data = True
+        queryset = User.objects.all()
+        resource_name = 'userprofile'
+        excludes = ['email', 'password', 'is_superuser']
+        # Add it here.
+        authentication = SessionAuthentication()
+        authorization = DjangoAuthorization()
+        list_allowed_methods = ['get']
         detail_allowed_methods = ['get']
+    
+    def dehydrate_user(self, bundle):
+        return bundle.obj.user.pk
+        
+    def get_object_list(self, request):
+        print request
+        return super(UserProfileResource, self).get_object_list(request).filter(user__pk=request.user)
 
 class MessageResource(ModelResource):
     user = fields.ToOneField(to='utopia.api.UserResource', attribute='user')

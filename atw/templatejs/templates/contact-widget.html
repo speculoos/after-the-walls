@@ -3,20 +3,20 @@
 <div class="title">Contact</div>
 <div class="form">
     <% if(logged){ %>
-    <p>% trans "Contact me!" %}
-    <span>% trans "Subject" %}</span>
+    <p>{% trans "Contact me!" %}
+    <span>{% trans "Subject" %}</span>
     <input type="text" class="subject" />
     </p>
     <p>
-    <span>% trans "Message" %}</span>
+    <span>{% trans "Message" %}</span>
     <textarea class="text"/>
     </p>
     <p>
-    <div class="submit">% trans "Send" %}</div>
+    <div class="submit">{% trans "Send" %}</div>
     </p>
     <% }else{%>
     <p>
-    % trans "You're not registered yet. Please " %}<a href="/#register">% trans "register" %}</a>.
+    {% trans "You're not registered yet. Please " %}<a href="/#register">{% trans "register" %}</a>.
     </p>
     <% } %>
 </div>

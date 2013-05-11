@@ -15,6 +15,12 @@ class UserProfile(models.Model):
         verbose_name_plural = "Profils utilisateur"
         
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='profile', verbose_name='Fou')
+    title = models.CharField(verbose_name='Titre', max_length=32, blank=True, null=True, default=None)
+    age = models.IntegerField(verbose_name='Age', blank=True, null=True, default=None)
+    skills = models.CharField(verbose_name='Capacités', max_length=512, blank=True, null=True, default=None)
+    interests = models.CharField(verbose_name='Interets', max_length=512, blank=True, null=True, default=None)
+    city = models.CharField(verbose_name='Ville', max_length=512, blank=True, null=True, default=None)
+    country = models.CharField(verbose_name='Pays', max_length=512, blank=True, null=True, default=None)
     description = models.TextField(verbose_name='Corps', blank=True, null=True, default=None)
     
     def __unicode__(self):

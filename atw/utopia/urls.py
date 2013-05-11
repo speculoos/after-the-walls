@@ -8,6 +8,8 @@ api.register(EpisodeResource())
 api.register(MediaResource())
 api.register(HomeImageResource())
 api.register(MessageResource())
+api.register(UserResource())
+api.register(UserProfileResource())
 
 urlpatterns = patterns('utopia',
     (r'', include(api.urls)),

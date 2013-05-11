@@ -2,13 +2,13 @@
 
 <div class="blockleft">
 <div class="message">
-<p>{% trans "Welcome everyone." %}</p>
+<h4>{% trans "Welcome everyone." %}</h4>
 <p>{% trans "If you are new or have never come to one of my talks, my name is Bernard Loizeau and I am inviting you to join a community of knowledge and expertise, brought together to create a utopia:" %}</p>
 <p>{% trans "The future of all of us, and the way in which it will be explained through our future homes." %}</p>
 <p>{% trans "In this new community, each of you has a place and a role to play. What are you waiting for? Come and join me!" %}</p>
 <p>{% trans "If you would not like to join the community, you can merely observe our interviews. There will always be time for you to join us later." %}</p>
 <p>{% trans "Come on in, don’t be afraid! The only thing that we have to fear is that, at worst, it works!" %}</p>
-<p>Bernard Loizeau</p>
+<p><i>Bernard Loizeau</i></p>
 </div>
 </div>
 
@@ -16,27 +16,23 @@
 <div class="form">
     <p class="headline">{% trans "Join the community" %}</p>
     <div class="block">
-    <p>{% trans "Enter your name" %}</p>
-    <input type="text" class="name" />
+      <p>{% trans "Enter your name" %}</p>
+      <input type="text" class="name" />
     </div>
     <div class="block">
-    <p>{% trans "Enter your email address" %}</p>
-    <input type="text" class="mail" />
+      <p>{% trans "Enter your email address" %}</p>
+      <input type="text" class="mail" />
     </div>
-    <div class="block">
-    <span class="submit">{% trans "Join" %}</span>
+      <div class="block">
+      <span class="submit btn btn-success">{% trans "Join" %}</span>
     </div>
-</div>
-
-<div class="answer">
-<p>{% trans "Thank you for registering." %}</p>
-<p>{% trans "An email has just been sent to you. To confirm your registration, please click on the link in the email." %}</p>
-</div>
-
-<div class="visit">
-<p class="headline">
-<span class="link" data-src="visit">{% trans "Continue as an observer" %}</span>
-</p>
-</div>
-
+    <div class="answer">
+      <p>{% trans "Thank you for registering." %}</p>
+      <p>{% trans "An email has just been sent to you. To confirm your registration, please click on the link in the email." %}</p>
+    </div>
+    <div class="visit">
+      <p>or<br>
+      <span class="link btn btn-success" data-src="visit">{% trans "Continue as an observer" %}</span>
+      </p>
+    </div>
 </div>
