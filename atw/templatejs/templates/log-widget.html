@@ -2,23 +2,15 @@
 
 <% if(logged){ %>
 <div class="logout">
-<span>Logout</span>
+<span class="link" data-src="logout">Logout</span>
 </div>
 <% }else{ %>
-<div class="login row">
-<span class="title">{% trans "Login" %}</span>{% trans " or " %}<span class="register">{% trans "register" %}</span>
+<div class="login form-inline">
     <div class="login-form">
-        <p>
-        <div class="label">{% trans "Username" %}</div>
-        <input type="text" class="user"  />
-        </p>
-        <p>
-        <div class="label">{% trans "Password" %}</div>
-        <input type="password" class="key"  />
-        </p>
-        <p>
-        <div class="submit">{% trans "Login" %}</div>
-        </p>
+        <input type="text" class="user input-mini" placeholder="{% trans "Username" %}"  />
+        <input type="password" class="key input-mini" placeholder="{% trans "Password" %}"  />
+        <button class="btn submit">{% trans "Sign in" %}</button>
+        <span class="link" data-src="register">{% trans "register" %}</span>
     </div>
 </div>
 <% } %>

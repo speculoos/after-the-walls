@@ -18,12 +18,9 @@ body{
 .widget{
     position:absolute;
     z-index:100;
-    padding:0px;
-    //border:2px solid gray;
-    //background-color:rgba(255,255,255,.5);
+    padding:3px;
     color:white;
-    font-size:15px;
-    line-height:19px;
+    font-weight:bold;
 }
 
 @color_link:#666;
@@ -38,11 +35,21 @@ body{
     }
 }
 
+.top-widget(@radius: 3px){
+/*    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;*/
+border-bottom-left-radius: @radius;
+border-bottom-right-radius: @radius;
+background-color:WindowFrame;
+}
 
 .log-widget{
     .widget;
-    top:20px;
-    right:20px;
+    .top-widget;
+    top:0;
+    right:5px;
     .logout{
         cursor:pointer;
     }

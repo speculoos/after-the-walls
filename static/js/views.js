@@ -47,18 +47,12 @@
             Template.render('log-widget', this, function(t){
                 var h = t(data);
                 $el.html(h);
-                $el.find('.login-form').hide();
             });
             return this;
         },
         events:{
-            'click .login .title':  'toggle',
-            'click .login .register':  'register',
             'click .login .submit': 'login',
             'click .logout':        'logout',
-        },
-        toggle:function(){
-            this.$el.find('.login-form').toggle();
         },
         _login_success:function(data){
             if(data.error)
@@ -96,9 +90,6 @@
                    dataType: 'json'
             });
         },
-        register:function(){
-            router.navigate('register');
-        }
     });
     
     ATW.ContactWidget = Backbone.View.extend({
