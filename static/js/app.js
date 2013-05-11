@@ -16,6 +16,30 @@
             window.router.navigate('episode/'+this.model.id);
         },
     };
+    var UserProfileProto = {
+        events:{
+            'click .submit':'submit',
+        },
+        postRender: function(){
+            
+        },
+        submit:function(){
+            var form = this.$el.find('.form');
+            var ins = form.find('input');
+            var model = this.model;
+            var dict = {};
+            ins.each(function(idx, e){
+                var that = $(e);
+                var val = that.val();
+                if(val !== '')
+                {
+                    dict[that.attr('name')] = val;
+                }
+            });
+            model.save(dict);
+            router.navigate('');
+        }
+    }
     
     var HomeView =  Backbone.View.extend({
         id:'galery',
@@ -118,8 +142,9 @@
         initialize:function(){
             this.components = {};
             window.ATW.Modeler(function(){
-//                 _.extend(window.ATW.Views.homeimage.prototype, ImageProto);
+                //                 _.extend(window.ATW.Views.homeimage.prototype, ImageProto);
                 _.extend(window.ATW.Views.episode.prototype, EpisodeProto);
+                _.extend(window.ATW.Views.userprofile.prototype, UserProfileProto);
                 
                 this.profiles = new ATW.Collections.userprofile;
                 var self = this;

@@ -16,6 +16,8 @@
             'visit': 'visit',
             'episode/:id': 'episode',
             'register': 'register',
+            'profile' : 'profile',
+            'logout': 'logout',
         },
         home:function(){
             if(!app.isLogged())
@@ -24,15 +26,23 @@
                 this.visit();
         },
         visit:function(){
-            app.setComponents('episodes player login contact'.split(' '));
+            app.setComponents('player login'.split(' '));
             app.playDefault();
         },
         episode:function(id){
-            app.setComponents('episodes player login contact'.split(' '));
+            app.setComponents('player login'.split(' '));
             app.playEpisode(id);
         },
         register:function(){
             app.setComponents('home register'.split(' '));
+        },
+        profile:function(){
+            app.setComponents('profile'.split(' '));
+        },
+        logout:function(){
+            ATW.Config.user_name = undefined;
+            ATW.Config.api_key = undefined;
+            app.resetViews(['login','contact']);
         },
     });
     

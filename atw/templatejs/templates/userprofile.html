@@ -1,72 +1,73 @@
 {% load i18n %}
 
-<div class="blockleft">
-<div class="message">
-<p>{% trans "Profiles sought" %}</p>
-<ul>
-<li>{% trans "Mathematician" %}</li>
-<li>{% trans "Engineer" %}</li>
-<li>{% trans "Secretary" %}</li>
-<li>{% trans "Builder" %}</li>
-<li>{% trans "IT" %}</li>
-<li>{% trans "Logistics" %}</li>
-<li>{% trans "Designer or cartographer" %}</li>
-<li>{% trans "Psychologist or psychiatrist" %}</li>
-<li>{% trans "Geologist" %}</li>
-<li>{% trans "Anthropologist" %}</li>
+<!-- <div class="blockleft"> -->
+<div class="message hero-unit">
+<h2>{% trans "Profiles sought: " %}</h2>
+<ul class="inline">
+<li>{% trans "Mathematician," %}</li>
+<li>{% trans "Engineer," %}</li>
+<li>{% trans "Secretary," %}</li>
+<li>{% trans "Builder," %}</li>
+<li>{% trans "IT," %}</li>
+<li>{% trans "Logistics," %}</li>
+<li>{% trans "Designer or cartographer," %}</li>
+<li>{% trans "Psychologist or psychiatrist," %}</li>
+<li>{% trans "Geologist," %}</li>
+<li>{% trans "Anthropologist," %}</li>
+<li>{% trans "Mathematician," %}</li>
 <li>{% trans "Someone who can translate our conversations into other languages, English as a priority." %}</li>
-<li>{% trans "Mathematician" %}</li>
 </ul>
 </div>
-</div>
+<!-- </div> -->
 
-<div class="blockright">
-<div class="form">
-    <p class="headline">{% trans "Update your profile" %}</p>
-    </div>
-    <div class="block">
-    <p>{% trans "Mr/Mrs/Ms" %}</p>
-    <input type="text" class="gender" />
-    </div>
-    <div class="block">
-    <p>{% trans "Surname" %}</p>
-    <input type="text" class="surname" />
-    </div>
-    <div class="answer">
-    <div class="block">
-    <p>{% trans "First name" %}</p>
-    <input type="text" class="firstname" />
-    </div>
-    <div class="block">
-    <p>{% trans "Age" %}</p>
-    <input type="text" class="age" />
-    </div>
-    <div class="block">
-    <p>{% trans "Skills" %}</p>
-    <input type="text" class="skills" />
-    </div>
-    <div class="block">
-    <p>{% trans "Interests" %}</p>
-    <input type="text" class="interests" />
-    </div>
-    <div class="block">
-    <p>{% trans "Town/city" %}</p>
-    <input type="text" class="city" />
-    </div>
-    <div class="block">
-    <p>{% trans "Country" %}</p>
-    <input type="text" class="country" />
-    </div>
-    <div class="block">
-    <p>{% trans "Languages spoken" %}</p>
-    <input type="text" class="languages" />
-    </div>
-    <div class="block">
-    <span class="submit">{% trans "Update" %}</span>
-    </div>
-    <div class="answer">
-    <p>{% trans "Thank you to update your profile!" %}</p>
-    <p>{% trans "Give me some time to gather and map this information and I’ll get back to you. We’ll let you know when the next newsletter is coming out by email. Bernard Loizeau" %}</p>
-    </div>
+<!-- <div class="blockright"> -->
+<div class="form hero-unit">
+
+<legend>{% trans "Update your profile" %}</legend>
+    
+    
+    <label>{% trans "Mr/Mrs/Ms" %}</label>
+    <input type="text" name="title" />
+    
+    
+    <label>{% trans "Surname" %}</label>
+    <input type="text" name="last_name" />
+    
+    
+    
+    <label>{% trans "First name" %}</label>
+    <input type="text" name="first_name" />
+    
+    
+    <label>{% trans "Age" %}</label>
+    <input type="text" name="age" />
+    
+    
+    <label>{% trans "Skills" %}</label>
+    <input type="text" name="skills" />
+    
+    
+    <label>{% trans "Interests" %}</label>
+    <input type="text" name="interests" />
+    
+    
+    <label>{% trans "Town/city" %}</label>
+    <input type="text" name="city" />
+    
+    
+    <label>{% trans "Country" %}</label>
+    <input type="text" name="country" />
+    
+    
+    <label>{% trans "Languages spoken" %}</label>
+    <input type="text" name="languages" />
+    
+    <p>
+    <div class="btn btn-primary submit">{% trans "Update" %}</div>
+    </p>
+    
+<!--    <label>{% trans "Thank you to update your profile!" %}</label>
+    <label>{% trans "Give me some time to gather and map this information and I’ll get back to you. We’ll let you know when the next newsletter is coming out by email. Bernard Loizeau" %}</label>-->
+
 </div>
-</div>
+<!-- </div> -->

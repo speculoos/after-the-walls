@@ -52,7 +52,6 @@
         },
         events:{
             'click .login .submit': 'login',
-            'click .logout':        'logout',
         },
         _login_success:function(data){
             if(data.error)
@@ -62,6 +61,7 @@
             }
             ATW.Config.user_name = data.user;
             ATW.Config.api_key = data.api_key;
+            app.profiles.fetch({reset:true});
             app.resetViews(['login','contact']);
         },
         login:function(){
@@ -73,21 +73,6 @@
                 data: { user:user, key:key },
                 success: this._login_success.bind(this),
                 dataType: 'json'
-            });
-            this.toggle();
-        },
-        _logout_success:function(data){
-            ATW.Config.user_name = undefined;
-            ATW.Config.api_key = undefined;
-            app.resetViews(['login','contact']);
-        },
-        logout:function(){
-            $.ajax({
-                type: "POST",
-                url: '/logout',
-                data: {},
-                success: this._logout_success.bind(this),
-                   dataType: 'json'
             });
         },
     });

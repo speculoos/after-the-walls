@@ -137,11 +137,8 @@ background-color:WindowFrame;
 .hero-unit{
     position:relative;
     margin:auto;
-    top:200px;
     width:60%;
     max-width:740px;
-    color:white;
-    background-color:@bg_dark_tr;
     line-height: 120%;
 }
 
@@ -153,12 +150,18 @@ background-color:WindowFrame;
     bottom:0;
     .html-widget{
         .hero-unit;
+        top:200px;
+        color:white;
+        background-color:@bg_dark_tr;
     }
 }
 
 
 .register-widget{
     .hero-unit;
+    top:200px;
+    color:white;
+    background-color:@bg_dark_tr;
     padding:20px;
     .blockleft{
         float:left;
@@ -187,6 +190,36 @@ background-color:WindowFrame;
             padding:12px 0;
         }
     }
+}
+
+.userprofile{
+    position:absolute;
+    top:0;right:0;bottom:0;left:0;
+    background-color:white;
+    overflow:auto;
+    .message{
+        margin:10px auto;
+        width:50%;
+        padding:20px;
+    }
+    .form{
+        margin:20px auto;
+        width:50%;
+        padding:20px;
+    }
+    .blockleft{
+        float:left;
+        width:45%;
+        padding:10px;
+        
+    }
+    
+    .blockright{
+        float:right;
+        width:45%;
+        padding:10px;
+    }
+    
 }
 
 #galery{

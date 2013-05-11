@@ -1,9 +1,9 @@
 {% load i18n %}
 
 <% if(logged){ %>
-<div class="logout">
-<span class="link" data-src="logout">Logout</span>
-</div>
+<span class="link" data-src="profile">Edit your profile</span>
+|
+<span class="link" data-src="logout">{% trans "Logout"%}</span>
 <% }else{ %>
 <div class="login form-inline">
     <div class="login-form">
