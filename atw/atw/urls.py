@@ -19,3 +19,10 @@ urlpatterns = patterns('',
     
     url(r'^admin/', include(admin.site.urls)),
 )
+
+from django.conf import settings
+
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += patterns('',
+        url(r'^rosetta/', include('rosetta.urls')),
+    )
