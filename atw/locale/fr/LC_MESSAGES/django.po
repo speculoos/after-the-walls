@@ -6,13 +6,13 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-11 02:01-0500\n"
+"POT-Creation-Date: 2013-05-11 12:16-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Pierre Marchand <pierremarc07@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,73 +20,277 @@ msgstr ""
 
 #: atw/local_settings.py:8
 msgid "English"
-msgstr ""
+msgstr "Anglais"
 
 #: atw/local_settings.py:9
 msgid "French"
-msgstr ""
+msgstr "Français"
 
-#: templatejs/templates/register-widget.html:5
-msgid "Welcome everyone."
-msgstr ""
+#: templatejs/templates/contact-widget.html:6
+msgid "Contact me!"
+msgstr "Contactez moi!"
+
+#: templatejs/templates/contact-widget.html:7
+msgid "Subject"
+msgstr "Objet"
+
+#: templatejs/templates/contact-widget.html:11
+msgid "Message"
+msgstr "Message"
+
+#: templatejs/templates/contact-widget.html:15
+msgid "Send"
+msgstr "Envoyer"
+
+#: templatejs/templates/contact-widget.html:19
+msgid "You're not registered yet. Please "
+msgstr "Vous n'êtes pas encore enregistré."
+
+#: templatejs/templates/contact-widget.html:19
+#: templatejs/templates/log-widget.html:13
+msgid "register"
+msgstr "Enregistrez vous"
+
+#: templatejs/templates/log-widget.html:6
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: templatejs/templates/log-widget.html:10
+msgid "Username"
+msgstr "Utilisateur"
+
+#: templatejs/templates/log-widget.html:11
+msgid "Password"
+msgstr "Mot de passe"
+
+#: templatejs/templates/log-widget.html:12
+msgid "Sign in"
+msgstr "Connexion"
+
+#: templatejs/templates/register-widget.html:4
+msgid "Join the community"
+msgstr "Rejoignez la communauté"
 
 #: templatejs/templates/register-widget.html:6
+msgid "Your name"
+msgstr "Votre nom"
+
+#: templatejs/templates/register-widget.html:7
+msgid "Your email address"
+msgstr "Votre addresse électronique"
+
+#: templatejs/templates/register-widget.html:9
+msgid "Join"
+msgstr "Rejoindre"
+
+#: templatejs/templates/register-widget.html:14
+msgid "Thank you for registering."
+msgstr "Merci pour votre inscription."
+
+#: templatejs/templates/register-widget.html:15
+msgid ""
+"An email has just been sent to you. To confirm your registration, please "
+"click on the link in the email."
+msgstr ""
+"Un email vient de vous être envoyé. Pour confirmer votre inscription,"
+"veuillez cliquer sur le lien que vous y trouverez. "
+
+#: templatejs/templates/register-widget.html:20
+msgid "continue as an observer"
+msgstr "Continuer comme observateur"
+
+#: templatejs/templates/register-widget.html:28
+msgid "Welcome everyone"
+msgstr "Bienvenue à tous"
+
+#: templatejs/templates/register-widget.html:29
 msgid ""
 "If you are new or have never come to one of my talks, my name is Bernard "
 "Loizeau and I am inviting you to join a community of knowledge and "
 "expertise, brought together to create a utopia:"
 msgstr ""
+"Si vous êtes un nouvel arrivant ou si vous n’avez assisté à aucune de mes "
+"conférences sachez que je m’appelle Bernard Loizeau et que je vous invite à "
+"rejoindre une communauté de savoir et de compétences au service d’une "
+"utopie : "
 
-#: templatejs/templates/register-widget.html:7
+#: templatejs/templates/register-widget.html:30
 msgid ""
 "The future of all of us, and the way in which it will be explained through "
 "our future homes."
 msgstr ""
+"Notre devenir à tous et la façon dont il s’exprimera au travers de nos "
+"futures habitations."
 
-#: templatejs/templates/register-widget.html:8
+#: templatejs/templates/register-widget.html:31
 msgid ""
 "In this new community, each of you has a place and a role to play. What are "
 "you waiting for? Come and join me!"
 msgstr ""
+"Dans cette nouvelle communauté, chacun de vous a une place à prendre, un "
+"rôle à jouer. N’attendez plus, et rejoignez-moi!"
 
-#: templatejs/templates/register-widget.html:9
+#: templatejs/templates/register-widget.html:32
 msgid ""
 "If you would not like to join the community, you can merely observe our "
 "interviews. There will always be time for you to join us later."
 msgstr ""
+"Si toutefois, vous ne désirez pas rejoindre la communauté, vous pouvez "
+"rester simple observateur de nos entrevues. Il sera toujours temps de nous "
+"rejoindre plus tard. "
 
-#: templatejs/templates/register-widget.html:10
+#: templatejs/templates/register-widget.html:33
 msgid ""
 "Come on in, don’t be afraid! The only thing that we have to fear is that, at "
 "worst, it works!"
 msgstr ""
+"Entrez, n’ayez pas peur ! La seule chose que nous ayons à craindre, c’est "
+"qu’au pire ça marche!"
 
-#: templatejs/templates/register-widget.html:17
-msgid "Join the community"
-msgstr ""
+#: templatejs/templates/userprofile.html:5
+msgid "Profiles sought: "
+msgstr "Profil recherchés"
 
-#: templatejs/templates/register-widget.html:20
-msgid "Enter your name"
-msgstr ""
+#: templatejs/templates/userprofile.html:7
+#: templatejs/templates/userprofile.html:17
+msgid "Mathematician,"
+msgstr "Mathématicien,"
 
-#: templatejs/templates/register-widget.html:24
-msgid "Enter your email address"
-msgstr ""
+#: templatejs/templates/userprofile.html:8
+msgid "Engineer,"
+msgstr "Ingénieur,"
 
-#: templatejs/templates/register-widget.html:28
-msgid "Join"
-msgstr ""
+#: templatejs/templates/userprofile.html:9
+msgid "Secretary,"
+msgstr "Secrétaire,"
 
-#: templatejs/templates/register-widget.html:33
-msgid "Thank you for registering."
-msgstr ""
+#: templatejs/templates/userprofile.html:10
+msgid "Builder,"
+msgstr "Maçon,"
 
-#: templatejs/templates/register-widget.html:34
+#: templatejs/templates/userprofile.html:11
+msgid "IT,"
+msgstr "Informaticien,"
+
+#: templatejs/templates/userprofile.html:12
+msgid "Logistics,"
+msgstr "Intendant logistique,"
+
+#: templatejs/templates/userprofile.html:13
+msgid "Designer or cartographer,"
+msgstr "Dessinateur ou cartographe,"
+
+#: templatejs/templates/userprofile.html:14
+msgid "Psychologist or psychiatrist,"
+msgstr "Psychologue ou psychiatre,"
+
+#: templatejs/templates/userprofile.html:15
+msgid "Geologist,"
+msgstr "Géologue,"
+
+#: templatejs/templates/userprofile.html:16
+msgid "Anthropologist,"
+msgstr "Anthropologue,"
+
+#: templatejs/templates/userprofile.html:18
 msgid ""
-"An email has just been sent to you. To confirm your registration, please "
-"click on the link in the email."
+"Someone who can translate our conversations into other languages, English as "
+"a priority."
+msgstr ""
+"Une personne capable de traduire nos conversations vers d’autres langues, "
+"prioritairement l’anglais."
+
+#: templatejs/templates/userprofile.html:26
+msgid "Update your profile"
+msgstr "Mise à jour du profil"
+
+#: templatejs/templates/userprofile.html:29
+msgid "Mr/Mrs/Ms"
+msgstr "M/Mme"
+
+#: templatejs/templates/userprofile.html:33
+msgid "Surname"
+msgstr "Nom"
+
+#: templatejs/templates/userprofile.html:38
+msgid "First name"
+msgstr "Prénom"
+
+#: templatejs/templates/userprofile.html:42
+msgid "Age"
+msgstr "Âge"
+
+#: templatejs/templates/userprofile.html:46
+msgid "Skills"
+msgstr "Compétences"
+
+#: templatejs/templates/userprofile.html:50
+msgid "Interests"
+msgstr "Intérêts"
+
+#: templatejs/templates/userprofile.html:54
+msgid "Town/city"
 msgstr ""
 
-#: templatejs/templates/register-widget.html:38
-msgid "Continue as an observer"
+#: templatejs/templates/userprofile.html:58
+msgid "Country"
 msgstr ""
+
+#: templatejs/templates/userprofile.html:62
+msgid "Languages spoken"
+msgstr "Ville"
+
+#: templatejs/templates/userprofile.html:66
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: templatejs/templates/userprofile.html:69
+msgid "Thank you to update your profile!"
+msgstr "Merci pour votre engagement!"
+
+#: templatejs/templates/userprofile.html:70
+msgid ""
+"Give me some time to gather and map this information and I’ll get back to "
+"you. We’ll let you know when the next newsletter is coming out by email. "
+"Bernard Loizeau"
+msgstr ""
+"Le temps de nous rassembler et de cartographier ces informations et je "
+"reviens vers vous. Vous serez tenu informé de la parution d’un prochain "
+"bulletin par un e-mail. Bernard Loizeau"
+
+#: templatejs/templates/visit-widget.html:3
+msgid "Continue as an observer"
+msgstr "Continuer comme observateur"
+
+#~ msgid "Profiles sought"
+#~ msgstr "Profil recherchés"
+
+#~ msgid "Mathematician"
+#~ msgstr "Mathématicien"
+
+#~ msgid "Engineer"
+#~ msgstr "Ingénieur"
+
+#~ msgid "Secretary"
+#~ msgstr "Secrétaire"
+
+#~ msgid "Builder"
+#~ msgstr "Maçon"
+
+#~ msgid "IT"
+#~ msgstr "Informaticien"
+
+#~ msgid "Logistics"
+#~ msgstr "Intendant logistique"
+
+#~ msgid "Designer or cartographer"
+#~ msgstr "Dessinateur ou cartographe"
+
+#~ msgid "Psychologist or psychiatrist"
+#~ msgstr "Psychologue ou psychiatre"
+
+#~ msgid "Geologist"
+#~ msgstr "Géologue"
+
+#~ msgid "Anthropologist"
+#~ msgstr "Anthropologue"
