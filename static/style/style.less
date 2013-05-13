@@ -12,7 +12,7 @@ body{
   font-family: 'Gentium Basic', serif;
 }
 
-@bg_dark_tr:rgba(0,0,0,.5);
+@bg_dark_tr:rgba(0,0,0,.1);
 @bg_light_tr:rgba(255,255,255,.5);
 
 .widget{
@@ -171,6 +171,7 @@ background-color:WindowFrame;
     width:60%;
     max-width:740px;
     line-height: 120%;
+    padding: 25px;
 }
 
 .html-proxy{
@@ -181,42 +182,49 @@ background-color:WindowFrame;
     bottom:0;
     .html-widget{
         .hero-unit;
+	width:24%;
         top:200px;
+	font-size: 16px;
         color:white;
         background-color:@bg_dark_tr;
+	text-shadow: 0 0 5px rgba(0,0,0,1), 0 0 8px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,1);
     }
 }
 
-
 .register-widget{
     .hero-unit;
-    top:200px;
+    top:250px;
     color:white;
     background-color:@bg_dark_tr;
     padding:20px;
+    vertical-align:text-bottom;
     .blockleft{
         float:left;
-        width:45%;
-        padding:10px;
+        width:55%;
+        padding:0px;
 /*         border-right:1px solid white; */
     }
     
+    h3 {line-height: 22px;}
+    
     .blockright{
         float:right;
-        width:45%;
-        padding:10px;
+        width:37%;
+        padding:0px;
         text-align:center;
     }
     
     .visit {
         margin-top:0px;
+	  .link {color:#999999;}
+	  .link:hover {color:white;}
     }
     
     .message{
         font-size:80%;
     }
     .form{
-        padding-top:32px;
+        padding-top:0px;
         .block{
             padding:12px 0;
         }
