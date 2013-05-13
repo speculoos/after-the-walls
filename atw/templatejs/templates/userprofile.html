@@ -19,7 +19,7 @@
 </ul>
 </div>
 <!-- </div> -->
-
+<% console.log(data); %>
 <!-- <div class="blockright"> -->
 <div class="form hero-unit">
 
@@ -27,40 +27,40 @@
     
     
     <label>{% trans "Mr/Mrs/Ms" %}</label>
-    <input type="text" name="title" />
+    <input type="text" name="title" value="<%- data.title %>" />
     
     
     <label>{% trans "Surname" %}</label>
-    <input type="text" name="last_name" <% if(last_name){} %>/>
+    <input type="text" name="last_name" value="<%- data.last_name %>" />
     
     
     
     <label>{% trans "First name" %}</label>
-    <input type="text" name="first_name" />
+    <input type="text" name="first_name"  value="<%- data.first_name %>" />
     
     
     <label>{% trans "Age" %}</label>
-    <input type="text" name="age" />
+    <input type="text" name="age"  value="<%- data.age %>" />
     
     
     <label>{% trans "Skills" %}</label>
-    <input type="text" name="skills" />
+    <input type="text" name="skills"  value="<%- data.skills %>" />
     
     
     <label>{% trans "Interests" %}</label>
-    <input type="text" name="interests" />
+    <input type="text" name="interests"  value="<%- data.interests %>" />
     
     
     <label>{% trans "Town/city" %}</label>
-    <input type="text" name="city" />
+    <input type="text" name="city"  value="<%- data.city %>" />
     
     
     <label>{% trans "Country" %}</label>
-    <input type="text" name="country" />
+    <input type="text" name="country"  value="<%- data.country %>" />
     
     
     <label>{% trans "Languages spoken" %}</label>
-    <input type="text" name="languages" />
+    <input type="text" name="languages"  value="<%- data.languages %>" />
     
     <p>
     <div class="btn btn-primary submit">{% trans "Update" %}</div>

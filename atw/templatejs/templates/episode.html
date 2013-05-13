@@ -1,7 +1,7 @@
 {% load i18n %}
 
-<% var is_current = current || false %>
-<% var is_visited = visited || false %>
+<% var is_current = data.current || false %>
+<% var is_visited = data.visited || false %>
 <span class="link <% if(is_current){print('current');} %> <% if(is_visited){print('visited');} %>" >
-<%- title %>
+<%- data.title %>
 </span>

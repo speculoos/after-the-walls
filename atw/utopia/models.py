@@ -6,6 +6,7 @@ utopia.models
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from adminsortable.models import Sortable
 
@@ -13,6 +14,9 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name = "Profil utilisateur"
         verbose_name_plural = "Profils utilisateur"
+        permissions = (
+            ("edit_own_profile", "Can edit own profile"),
+            )
         
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='profile', verbose_name='Fou')
     title = models.CharField(verbose_name='Titre', max_length=32, blank=True, null=True, default=None)
@@ -21,7 +25,7 @@ class UserProfile(models.Model):
     interests = models.CharField(verbose_name='Interets', max_length=512, blank=True, null=True, default=None)
     city = models.CharField(verbose_name='Ville', max_length=512, blank=True, null=True, default=None)
     country = models.CharField(verbose_name='Pays', max_length=512, blank=True, null=True, default=None)
-    description = models.TextField(verbose_name='Corps', blank=True, null=True, default=None)
+    languages = models.CharField(verbose_name='Langues', max_length=512, blank=True, null=True, default=None)
     
     def __unicode__(self):
         return '%s <%s>'%(self.user.get_full_name(), self.user.email)
@@ -108,3 +112,11 @@ class Episode(models.Model):
     def __unicode__(self):
         return self.title
         
+        
+
+def atw_create_profile(sender, **kwargs):
+    p = UserProfile()
+    p.user = kwargs['instance']
+    p.save()
+    
+models.signals.post_save.connect(atw_create_profile, sender=User, weak=False)

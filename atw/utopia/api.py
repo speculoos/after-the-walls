@@ -20,6 +20,41 @@ from magic import Magic
 from os import path
 import markdown2 as md
 
+
+from tastypie.authorization import Authorization
+from tastypie.exceptions import Unauthorized
+
+
+class UserObjectsOnlyAuthorization(Authorization):
+    def read_list(self, object_list, bundle):
+        return object_list.filter(user=bundle.request.user)
+
+    def read_detail(self, object_list, bundle):
+        return bundle.obj.user == bundle.request.user
+
+    def create_list(self, object_list, bundle):
+        return object_list
+
+    def create_detail(self, object_list, bundle):
+        return bundle.obj.user == bundle.request.user
+
+    def update_list(self, object_list, bundle):
+        allowed = []
+        # Since they may not all be saved, iterate over them.
+        for obj in object_list:
+            if obj.user == bundle.request.user:
+                allowed.append(obj)
+        return allowed
+
+    def update_detail(self, object_list, bundle):
+        return bundle.obj.user == bundle.request.user
+
+    def delete_list(self, object_list, bundle):
+        raise Unauthorized("Sorry, no deletes.")
+
+    def delete_detail(self, object_list, bundle):
+        raise Unauthorized("Sorry, no deletes.")
+
 magic_mime = Magic(mime=True)
 def get_mime(fp):
     ret = magic_mime.from_file(path.join(settings.MEDIA_ROOT, fp))
@@ -44,7 +79,9 @@ class UserResource(ModelResource):
         return super(UserResource, self).get_object_list(request).filter(pk=request.user.pk)
         
 class UserProfileResource(ModelResource):
-    user = fields.ToOneField(to='utopia.api.UserResource', attribute='user')
+    #user = fields.ToOneField(to='utopia.api.UserResource', attribute='user')
+    first_name = fields.CharField()
+    last_name = fields.CharField()
     
     class Meta:
         always_return_data = True
@@ -53,13 +90,27 @@ class UserProfileResource(ModelResource):
         excludes = ['email', 'password', 'is_superuser']
         # Add it here.
         authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
+        authorization = UserObjectsOnlyAuthorization()
         list_allowed_methods = ['get']
-        detail_allowed_methods = ['get']
+        detail_allowed_methods = ['get','put']
     
-    def dehydrate_user(self, bundle):
-        return bundle.obj.user.pk
+    def dehydrate_first_name(self, bundle):
+        return bundle.obj.user.first_name
         
+    def dehydrate_last_name(self, bundle):
+        return bundle.obj.user.last_name
+    
+    def obj_update(self, bundle, **kwargs):
+        ret =  super(UserProfileResource, self).obj_update(bundle, **kwargs)
+        try:
+            u = bundle.obj.user
+            u.first_name = bundle.data['first_name']
+            u.last_name = bundle.data['last_name']
+            u.save()
+        except Exception:
+            print 'could not get the user from obj'
+        return ret
+    
     def get_object_list(self, request):
         q = super(UserProfileResource, self).get_object_list(request)
         fq = q.filter(user=request.user)
@@ -87,7 +138,7 @@ class MessageResource(ModelResource):
         list_allowed_methods = ['get','post']
         detail_allowed_methods = ['get','post']
         authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
+        authorization = UserObjectsOnlyAuthorization()
 
 class EpisodeResource(ModelResource):
     media = fields.ToOneField(to='utopia.api.MediaResource', attribute='media', null=True, blank=True)
