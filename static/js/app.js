@@ -62,9 +62,9 @@
             var img = new Image;
             img.src = src;
             this.cache[item.id] = img;
-            $(img).on('load',function(){
-                console.log('L: '+src);
-            });
+//             $(img).on('load',function(){
+//                 console.log('L: '+src);
+//             });
         },
         renderOne:function(item){
             this.cacheImage(item);
@@ -215,7 +215,7 @@
                     this.components[c].rendered = false;
                 }
                 catch(e){
-                    console.log('Could not reset: '+c);
+//                     console.log('Could not reset: '+c);
                 }
             }
             this.render();
@@ -234,7 +234,7 @@
                     this.components[c].visible = true;
                 }
                 catch(e){
-                    console.log('Could not activate: '+c);
+//                     console.log('Could not activate: '+c);
                 }
             }
             this.render();

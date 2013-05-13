@@ -56,7 +56,7 @@
         _login_success:function(data){
             if(data.error)
             {
-                console.log('Login Error: '+data.error);
+//                 console.log('Login Error: '+data.error);
                 return;
             }
             ATW.Config.user_name = data.user;

@@ -124,5 +124,25 @@ def atw_create_profile(sender, **kwargs):
         p.save()
     else:
         pass
+        
+def atw_notice_profile(sender, **kwargs):
+    from django.core.mail import mail_admins
+    profile = kwargs['instance']
+    message = [u'Profile update %s <%s>'%(profile.user.get_full_name(), profile.user.email),]
+    for attr in [u'title',u'age', u'skills', u'interests', u'city', u'country', u'languages']:
+        message.append('%s:'%(attr,))
+        try:
+            message.append(getattr(profile, attr))
+        except Exception:
+            pass
+            
+    try:
+        mail_admins('Profile update', '\n\n'.join(message))
+    except Exception:
+        print('Unable to send profile update notice')
+    
+        
+    
     
 models.signals.post_save.connect(atw_create_profile, sender=User, weak=False)
+models.signals.post_save.connect(atw_notice_profile, sender=UserProfile, weak=False)
