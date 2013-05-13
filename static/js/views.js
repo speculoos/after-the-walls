@@ -172,22 +172,23 @@
             this.player.jPlayer("destroy");
             var type = item.get('mime').split('/').pop();
             var self = this;
+            
+            this.player.jPlayer(options);
+            var media = {};
+            media[type] = item.get('resource');
             var options = {
                 ready:function(){
+                    self.player.jPlayer('setMedia', media);
                     self.trigger('player:ready');
                 },
                 timeupdate: this.update.bind(this),
                 cssSelectorAncestor: '#'+$el.attr('id'),
                 errorAlerts: false,
                 warningAlerts: false,
-                swfPath: "./lib/Jplayer.swf",
+                swfPath: "/static/lib/Jplayer.swf",
                 supplied: type,
                 fullWindow:true,
             };
-            this.player.jPlayer(options);
-            var media = {};
-            media[type] = item.get('resource');
-            this.player.jPlayer('setMedia', media);
         },
         update:function(){
             
@@ -229,24 +230,25 @@
             var $el = this.$el;
             this.player.jPlayer("destroy");
             var self = this;
-            var type = item.split('.').pop()
+            var type = item.split('.').pop();
+            
+            var media = {};
+            media[type] = item;
             var options = {
                 ready:function(){
+                    self.player.jPlayer('setMedia', media);
                     self.trigger('player:ready');
                 },
                 timeupdate: this.update.bind(this),
                 cssSelectorAncestor: '#'+$el.attr('id'),
-                errorAlerts: false,
+                errorAlerts: true,
                 warningAlerts: false,
-                swfPath: "./lib/Jplayer.swf",
+                swfPath: "/static/js/lib/Jplayer.swf",
                 supplied: type,
                 loop:true,
             };
             this.player.jPlayer(options);
             this.playerData = this.player.data('jPlayer');
-            var media = {};
-            media[type] = item;
-            this.player.jPlayer('setMedia', media);
         },
         update:function(){
             
