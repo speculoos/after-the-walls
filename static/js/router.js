@@ -38,10 +38,18 @@
             app.playEpisode(id);
         },
         register:function(){
-            app.setComponents('home register'.split(' '));
+            app.setComponents('home audio register'.split(' '));
+            app.playAudio('/static/home.m4a');
         },
         profile:function(){
-            app.setComponents('profile'.split(' '));
+            if(!app.isLogged())
+            {
+                this.navigate('register');
+            }
+            else
+            {
+                app.setComponents('profile'.split(' '));
+            }
         },
         logout:function(){
             $.ajax({
