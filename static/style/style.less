@@ -35,14 +35,14 @@ span.link{
     }
 }
 
-.top-widget(@radius: 3px){
+.top-widget(@radius: 8px){
 /*    -webkit-border-radius: @radius;
     -moz-border-radius: @radius;
     -ms-border-radius: @radius;
     -o-border-radius: @radius;*/
 border-bottom-left-radius: @radius;
 border-bottom-right-radius: @radius;
-background-color:WindowFrame;
+background-color:black;
 }
 
 .roundedbox(@radius: 3px){
@@ -57,7 +57,7 @@ background-color:WindowFrame;
     .widget;
     .top-widget;
     top:0;
-    right:5px;
+    right:40px;
     .logout{
         cursor:pointer;
     }
@@ -267,4 +267,30 @@ background-color:WindowFrame;
     left:0;
     right:0;
     bottom:0;
+}
+
+.login-form .log-widget{
+  input[type="text"] input[type="password"] {
+    height: 11px;
+    font-size: 10px;
+    }
+  btn-link{
+    color: white;
+    a:hover span:hover{color: white;}
+  }
+}
+
+input {
+    height: 11px;
+    font-size: 10px;
+    }
+
+#audio-player{
+border-radius: 15px;
+background-color: transparent;
+border: 0px solid #e3e3eb;
+}
+
+.log-widget{
+  background: transparent;
 }

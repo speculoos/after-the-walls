@@ -1,17 +1,16 @@
 {% load i18n %}
 
 <% if(data.logged){ %>
-<span class="link" data-src="profile">Edit your profile</span>
+<button class="link btn-small btn-link" data-src="profile">Edit your profile</button>
 |
-<span class="link" data-src="logout">{% trans "Logout"%}</span>
+<button class="link btn-small btn-link" data-src="logout">{% trans "Logout"%}</button>
 <% }else{ %>
 <div class="login form-inline">
     <div class="login-form">
-    
-        <input type="text" class="user input-mini" placeholder="{% trans "Username" %}"  />
-        <input type="password" class="key input-mini" placeholder="{% trans "Password" %}"  />
-        <button class="btn submit">{% trans "Sign in" %}</button>
-        <span class="link" data-src="register">{% trans "register" %}</span>
+        <input type="text" class="user input-small" placeholder="{% trans "Username" %}" style="height:11px;font-size:10px;" />
+        <input type="password" class="key input-small" placeholder="{% trans "Password" %}" style="height:11px;font-size:10px;" />
+        <button class="btn-small btn-link submit">{% trans "Sign in" %}</button>
+        <button class="link btn-small btn-link submit" data-src="register">{% trans "Register" %}</button>
         <!--
         {%if LANGUAGE_CODE == 'fr' %}
         <button class="link" data-src="setlang/en">En</button>
