@@ -22,7 +22,10 @@
         },
         home:function(){
             if(!app.isLogged())
-                app.setComponents('home register visit login'.split(' '));
+            {
+                app.setComponents('home audio register visit login'.split(' '));
+                app.playAudio('/static/home.m4a');
+            }
             else
                 this.visit();
         },

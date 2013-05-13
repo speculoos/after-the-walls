@@ -58,7 +58,7 @@ class UserObjectsOnlyAuthorization(Authorization):
 magic_mime = Magic(mime=True)
 def get_mime(fp):
     ret = magic_mime.from_file(path.join(settings.MEDIA_ROOT, fp))
-    print '%s %s %s'%(settings.MEDIA_ROOT, fp, ret)
+    #print '%s %s %s'%(settings.MEDIA_ROOT, fp, ret)
     return ret
 
 models.signals.post_save.connect(create_api_key, sender=User)

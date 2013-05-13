@@ -45,6 +45,14 @@ border-bottom-right-radius: @radius;
 background-color:WindowFrame;
 }
 
+.roundedbox(@radius: 3px){
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+
 .log-widget{
     .widget;
     .top-widget;
@@ -131,6 +139,29 @@ background-color:WindowFrame;
     .player{
         margin:auto;
         width:600px;
+    }
+}
+
+#audio-player{
+    .roundedbox;
+    position:absolute;
+    z-index:100;
+    bottom:12px;
+    right:12px;
+    padding: 5px;
+    background-color: rgb(158, 158, 158);
+    border: 1px solid rgb(227, 227, 235);
+    
+    &:hover{
+        background-color: rgb(255, 255, 255);
+    }
+    .control{
+        margin:2px;
+        .roundedbox(2px);
+        border:1px solid transparent;
+        &:hover{
+            border:1px solid rgb(158, 158, 158);
+        }
     }
 }
 

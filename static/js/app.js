@@ -168,6 +168,7 @@
                 this.registerComponent('player', new ATW.VideoPlayer);
                 this.registerComponent('contact', new ATW.ContactWidget);
                 this.registerComponent('html', new HTMLProxyView);
+                this.registerComponent('audio', new ATW.AudioPlayer);
                 
                 this.components.home.view.images.fetch();
                 this.components.episodes.view.episodes.fetch();
@@ -278,7 +279,24 @@
             this.components.html.view.setView(
                 new ATW.HTMLEpisodeview({model:item})
             );
+            var hasAudio = false;
+            if(item.get('bg_track'))
+            {
+                this.setComponent('audio');
+                hasAudio = true;
+            }
             this.render();
+            if(hasAudio)
+                this.playAudio(item.get('bg_track'));
+        },
+        playAudio:function(trackUrl){
+//             this.setComponent('audio');
+            this.components.audio.view.once(
+                'player:ready',
+                this.components.audio.view.play, 
+                this.components.audio.view
+            );
+            this.components.audio.view.loadMedia(trackUrl);
         },
         playMedia:function(item){
             var media_ref = item.get('media');
