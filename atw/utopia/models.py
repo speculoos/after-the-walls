@@ -115,8 +115,14 @@ class Episode(models.Model):
         
 
 def atw_create_profile(sender, **kwargs):
-    p = UserProfile()
-    p.user = kwargs['instance']
-    p.save()
+    user = kwargs['instance']
+    try:
+        UserProfile.objects.get(user=user)
+    except UserProfile.DoesNotExist:
+        p = UserProfile()
+        p.user = kwargs['instance']
+        p.save()
+    else:
+        pass
     
 models.signals.post_save.connect(atw_create_profile, sender=User, weak=False)
