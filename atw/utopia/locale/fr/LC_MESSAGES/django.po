@@ -28,7 +28,7 @@ msgstr "Français"
 
 #: templatejs/templates/contact-widget.html:6
 msgid "Contact me!"
-msgstr "Contactez moi!"
+msgstr "Contactez-moi!"
 
 #: templatejs/templates/contact-widget.html:7
 msgid "Subject"
@@ -43,13 +43,13 @@ msgid "Send"
 msgstr "Envoyer"
 
 #: templatejs/templates/contact-widget.html:19
-msgid "You're not registered yet. Please "
+msgid "You're not registered yet."
 msgstr "Vous n'êtes pas encore enregistré."
 
 #: templatejs/templates/contact-widget.html:19
 #: templatejs/templates/log-widget.html:14
-msgid "register"
-msgstr "Enregistrez vous"
+msgid "Register"
+msgstr "Enregistrez-vous"
 
 #: templatejs/templates/log-widget.html:6
 msgid "Logout"
@@ -96,7 +96,7 @@ msgstr ""
 "veuillez cliquer sur le lien que vous y trouverez. "
 
 #: templatejs/templates/register-widget.html:21
-msgid "continue as an observer"
+msgid "Continue as an observer"
 msgstr "Continuer comme observateur"
 
 #: templatejs/templates/register-widget.html:29
@@ -230,15 +230,15 @@ msgstr "Intérêts"
 
 #: templatejs/templates/userprofile.html:54
 msgid "Town/city"
-msgstr ""
+msgstr "Ville/localité"
 
 #: templatejs/templates/userprofile.html:58
 msgid "Country"
-msgstr ""
+msgstr "Pays"
 
 #: templatejs/templates/userprofile.html:62
 msgid "Languages spoken"
-msgstr "Ville"
+msgstr "Langue parlée"
 
 #: templatejs/templates/userprofile.html:66
 msgid "Update"
