@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.core import serializers
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404
+from django.conf import settings
 import json
 
 class HomePageView(TemplateView):
@@ -32,6 +33,12 @@ class HomePageView(TemplateView):
                 context['key'] = self.request.user.api_key.key
             except Exception:
                 pass
+        try:
+            context['OWA_SITE_ID'] = settings.OWA_SITE_ID
+            context['OWA_BASE_URL'] = settings.OWA_BASE_URL
+            context['OWA_ENABLE'] = True
+        except Exception:
+            pass
         return context
         
         
