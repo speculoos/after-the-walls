@@ -27,6 +27,15 @@ class UserProfile(models.Model):
     country = models.CharField(verbose_name='Pays', max_length=512, blank=True, null=True, default=None)
     languages = models.CharField(verbose_name='Langues', max_length=512, blank=True, null=True, default=None)
     
+    def user_name(self):
+        return self.user.get_full_name()
+    
+    def location(self):
+        return u'%s, %s'%(self.city, self.country)
+        
+    def is_active(self):
+        return self.user.is_active
+    
     def __unicode__(self):
         return '%s <%s>'%(self.user.get_full_name(), self.user.email)
 

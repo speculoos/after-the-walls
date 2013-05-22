@@ -8,6 +8,31 @@
     'strict';
     var ATW = window.ATW;
     
+    
+    ATW.AlertView = Backbone.View.extend({
+        className:'alert',
+        initialize:function(){
+            this.$close = $('<button>&times;</button>').addClass('close'); 
+            if(this.options.status)
+            {
+                this.$el.addClass('alert-'+this.options.status);
+            }
+        },
+        render:function(){
+            this.$close.appendTo(this.el);
+            this.$el.append(this.options.message || 'ERROR happened');
+            return this
+        },
+        events:{
+            'click .close':'close',
+        },
+        close:function(){
+            this.trigger('close');
+            this.$el.remove();
+        }
+        
+    });
+    
     ATW.HTMLEpisodeview = Backbone.View.extend({
         className:'html-widget',
         initialize:function(){
@@ -129,6 +154,14 @@
             form.empty().append(success);
             success.show();
         },
+        _register_error:function(response){
+            var data = JSON.parse(response.responseText);
+            var alert = new ATW.AlertView({
+                message:data.error,
+                status:'error',
+            })
+            this.$el.append(alert.render().el);
+        },
         send:function(){
             var name = this.$el.find('input.name').val();
             var mail = this.$el.find('input.mail').val();
@@ -137,7 +170,8 @@
                 url: '/register_step_0',
                 data: { name:name, email:mail},
                 success: this._register_success.bind(this),
-                   dataType: 'json'
+                error: this._register_error.bind(this),
+                dataType: 'json'
             });
         },
     });
@@ -173,7 +207,6 @@
             var type = item.get('mime').split('/').pop();
             var self = this;
             
-            this.player.jPlayer(options);
             var media = {};
             media[type] = item.get('resource');
             var options = {
@@ -189,6 +222,8 @@
                 supplied: type,
                 fullWindow:true,
             };
+            this.player.jPlayer(options);
+            this._playerRendered = false;
         },
         update:function(){
             
@@ -241,7 +276,7 @@
                 },
                 timeupdate: this.update.bind(this),
                 cssSelectorAncestor: '#'+$el.attr('id'),
-                errorAlerts: true,
+                errorAlerts: false,
                 warningAlerts: false,
                 swfPath: "/static/js/lib/Jplayer.swf",
                 supplied: type,
@@ -249,6 +284,7 @@
             };
             this.player.jPlayer(options);
             this.playerData = this.player.data('jPlayer');
+            this._playerRendered = false;
         },
         update:function(){
             
