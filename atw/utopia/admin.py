@@ -20,9 +20,14 @@ class UserProfileAdmin(admin.ModelAdmin):
         
 class EpisodeAdmin(TabbedTr, TranslationAdmin):
     list_display = ('title', 'pub_date')
+    
+
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('name','start_date','end_date')
         
 admin.site.register(Episode, EpisodeAdmin)
 admin.site.register(HomeImage)
 admin.site.register(Media)
 admin.site.register(Message)
 admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(Event, EventAdmin)

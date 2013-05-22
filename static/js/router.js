@@ -23,18 +23,18 @@
         home:function(){
             if(!app.isLogged())
             {
-                app.setComponents('home audio register visit login'.split(' '));
+                app.setComponents('home audio register visit login agenda'.split(' '));
                 app.playAudio('/static/home.mp3');
             }
             else
                 this.visit();
         },
         visit:function(){
-            app.setComponents('player login'.split(' '));
+            app.setComponents('player login agenda'.split(' '));
             app.playDefault();
         },
         episode:function(id){
-            app.setComponents('player login'.split(' '));
+            app.setComponents('player login agenda'.split(' '));
             app.playEpisode(id);
         },
         register:function(){

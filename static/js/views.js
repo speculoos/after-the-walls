@@ -90,6 +90,14 @@
             app.resetViews(['login','contact']);
             router.navigate('visit');
         },
+        _login_error:function(response){
+            var data = JSON.parse(response.responseText);
+            var alert = new ATW.AlertView({
+                message:data.error,
+                status:'error',
+            })
+            this.$el.append(alert.render().el);
+        },
         login:function(){
             var user = this.$el.find('input.user').val();
             var key = this.$el.find('input.key').val();
@@ -98,6 +106,7 @@
                 url: '/login',
                 data: { user:user, key:key },
                 success: this._login_success.bind(this),
+                error: this._login_error.bind(this),
                 dataType: 'json'
             });
         },

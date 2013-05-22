@@ -10,6 +10,7 @@ api.register(HomeImageResource())
 api.register(MessageResource())
 api.register(UserResource())
 api.register(UserProfileResource())
+api.register(EventResource())
 
 urlpatterns = patterns('utopia',
     (r'', include(api.urls)),

@@ -122,6 +122,21 @@ class Episode(models.Model):
         return self.title
         
         
+class Event(models.Model):
+    class Meta:
+        verbose_name = "Événement"
+        verbose_name_plural = "Événements"
+        ordering = ['start_date']
+        
+    name = models.CharField(verbose_name='Nom', max_length=1024)
+    location = models.CharField(verbose_name='Ville', max_length=256,blank=True, null=True, default=None)
+    body = models.TextField(verbose_name='Corps',blank=True, null=True, default=None)
+    start_date = models.DateField(verbose_name='Date début')
+    end_date = models.DateField(verbose_name='Date fin')
+    
+    def __unicode__(self):
+        return self.name
+    
 
 def atw_create_profile(sender, **kwargs):
     user = kwargs['instance']
@@ -139,9 +154,8 @@ def atw_notice_profile(sender, **kwargs):
     profile = kwargs['instance']
     message = [u'Profile update %s <%s>'%(profile.user.get_full_name(), profile.user.email),]
     for attr in [u'title',u'age', u'skills', u'interests', u'city', u'country', u'languages']:
-        message.append('%s:'%(attr,))
         try:
-            message.append(getattr(profile, attr))
+            message.append('%s: %s'%(attr,getattr(profile, attr)))
         except Exception:
             pass
             

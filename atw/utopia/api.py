@@ -13,6 +13,7 @@ from tastypie.models import create_api_key
 from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
+from django.template.defaultfilters import date as _date
 
 from utopia.models import *
 
@@ -199,4 +200,20 @@ class HomeImageResource(ModelResource):
         return bundle.obj.image.url
             
         
+class EventResource(ModelResource):
+    class Meta:
+        always_return_data = True
+        queryset = Event.objects.all()
+        list_allowed_methods = ['get']
+        detail_allowed_methods = ['get']
+        authorization = DjangoAuthorization()
         
+    start = fields.CharField()
+    end = fields.CharField()
+    
+    def dehydrate_start(self, bundle):
+        return _date(bundle.obj.start_date, 'N j, Y')
+        
+    def dehydrate_end(self, bundle):
+        return _date(bundle.obj.end_date, 'N j, Y')
+    

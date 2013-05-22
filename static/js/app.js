@@ -114,6 +114,35 @@
         },
     });
     
+    var EventCollectionView = Backbone.View.extend({
+        id:'events',
+        initialize:function(){
+            this.atw_events = new window.ATW.Collections.event;
+            this.atw_events.on('add', this.renderOne, this);
+            this.atw_events.on('reset', this.render, this);
+            this.items = {};
+        },
+        renderOne:function(item){
+            if(this.items[item.cid] === undefined)
+            {
+                item.set({
+                    visited:false,
+                    current:false,
+                });
+                var i = new window.ATW.Views.event({model:item});
+                this.$el.append(i.render().el);
+                this.items[item.cid] = i;
+            }
+            return this;
+        },
+        render:function(){
+            this.atw_events.each(function(item){
+                this.renderOne(item);
+            }, this);
+            return this;
+        },
+    });
+    
     var HTMLProxyView = Backbone.View.extend({
         className:'html-proxy',
         initialize:function(){
@@ -169,9 +198,11 @@
                 this.registerComponent('contact', new ATW.ContactWidget);
                 this.registerComponent('html', new HTMLProxyView);
                 this.registerComponent('audio', new ATW.AudioPlayer);
+                this.registerComponent('agenda', new EventCollectionView);
                 
                 this.components.home.view.images.fetch();
                 this.components.episodes.view.episodes.fetch();
+                this.components.agenda.view.atw_events.fetch();
                 this.episodes = this.components.episodes.view.episodes;
                 
                 this.messages = new ATW.Collections.message;
