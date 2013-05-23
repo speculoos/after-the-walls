@@ -9,6 +9,10 @@
     var Router =  Backbone.Router.extend({
         navigate:function(route, options){
             options = _.extend({trigger: true}, options);
+            if((typeof OWATracker) !== 'undefined')
+            {
+                OWATracker.trackAction('Navigation', route);
+            }
             Backbone.Router.prototype.navigate.apply(this, [route, options]);
         },
         routes:{
