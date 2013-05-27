@@ -106,7 +106,6 @@ def register_step_0(request):
 def register_step_1(request):
     uname = request.GET.get('user', None)
     key = request.GET.get('key', None)
-    print('RS1 (%s) (%s)'%(uname,key))
     from django.contrib import auth
     from django.contrib.contenttypes.models import ContentType
     from utopia.models import Message
@@ -126,7 +125,6 @@ def register_step_1(request):
     
     ctx = RequestContext(request)
     w_email = render_to_string('email_welcome.html', {'user':u, 'password':a_password}, ctx)
-    print w_email
     u.email_user('After The Walls Registration', w_email)
     user = auth.authenticate(username=u.get_username(), password=a_password)
     auth.login(request, user)
