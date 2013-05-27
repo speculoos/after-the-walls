@@ -140,10 +140,21 @@
         events:{
             'click .submit': 'send',
         },
+        _send_success:function(){
+            router.navigate('visit');
+        },
+        _send_error:function(a,b,c){
+//             var data = JSON.parse(response.responseText);
+            var alert = new ATW.AlertView({
+                message:'An error occured while sending message',
+                status:'error',
+            })
+            this.$el.append(alert.render().el);
+        },
         send:function(){
             var subject = this.$el.find('input.subject').val();
             var body = this.$el.find('textarea.text').val();
-            app.saveMessage(subject, body);
+            app.saveMessage(subject, body, this._send_success.bind(this), this._send_error.bind(this));
         },
     });
     

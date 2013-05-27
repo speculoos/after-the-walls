@@ -367,12 +367,16 @@
             }
             this.current_episode = item;
         },
-        saveMessage:function(subject, body){
+        saveMessage:function(subject, body, success, error){
             this.messages.create({
                 subject:subject,
                 body:body,
                 user:this.getUser().id,
+            },{
+                success:success,
+                error:error,
             });
+            this.resetViews(['contact']);
         },
     });
     

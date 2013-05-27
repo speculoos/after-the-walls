@@ -124,10 +124,10 @@ class MessageResource(ModelResource):
         #print bundle
         u = User.objects.get(pk=bundle.data['user'])
         bundle.data['user'] = u
-        super( MessageResource, self ).obj_create( bundle, **kwargs )
+        return super( MessageResource, self ).obj_create( bundle, **kwargs )
         
-    def dehydrate_user(self, bundle):
-        return bundle.obj.user.pk
+    #def dehydrate_user(self, bundle):
+        #return bundle.obj.user.pk
         
     def get_object_list(self, request):
         return super(MessageResource, self).get_object_list(request).filter(user=request.user)

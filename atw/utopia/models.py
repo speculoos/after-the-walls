@@ -7,6 +7,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.mail import mail_admins
 
 from adminsortable.models import Sortable
 
@@ -150,7 +151,6 @@ def atw_create_profile(sender, **kwargs):
         pass
         
 def atw_notice_profile(sender, **kwargs):
-    from django.core.mail import mail_admins
     profile = kwargs['instance']
     message = [u'Profile update %s <%s>'%(profile.user.get_full_name(), profile.user.email),]
     for attr in [u'title',u'age', u'skills', u'interests', u'city', u'country', u'languages']:
@@ -165,7 +165,20 @@ def atw_notice_profile(sender, **kwargs):
         print('Unable to send profile update notice')
     
         
+def atw_send_message(sender, **kwargs):
+    message = kwargs['instance']
+    subject = '[Message] %s'%(message.subject, )
+    m = ['New message from %s <%s>'%(message.user.get_full_name(), message.user.email)]
+    m.append('message ID: %d'%(message.id,))
+    m.append('='*72)
+    m.append(message.body)
+    m.append('='*72)
     
+    try:
+        mail_admins(subject, '\n\n'.join(m))
+    except Exception as e:
+        print('Unable to send new message notice: %s'%e)
     
 models.signals.post_save.connect(atw_create_profile, sender=User, weak=False)
 models.signals.post_save.connect(atw_notice_profile, sender=UserProfile, weak=False)
+models.signals.post_save.connect(atw_send_message, sender=Message, weak=False)
