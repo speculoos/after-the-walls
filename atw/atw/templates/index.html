@@ -28,7 +28,7 @@
 window.ATW = {
     Config:{
         API_URL: '/u/api/',
-        user_name: {% if user %}'{{user}}'{% else %}undefined{% endif %},
+        user: {% if user %}'{{user}}'{% else %}undefined{% endif %},
         user_pk: {% if user_pk %}{{user_pk}}{% else %}undefined{% endif %},
         api_key: {% if key %}'{{key}}'{% else %}undefined{% endif %},
         csrf_token : '{{ csrf_token }}',

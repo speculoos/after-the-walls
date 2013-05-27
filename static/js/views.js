@@ -21,7 +21,7 @@
         render:function(){
             this.$close.appendTo(this.el);
             this.$el.append(this.options.message || 'ERROR happened');
-            return this
+            return this;
         },
         events:{
             'click .close':'close',
@@ -84,8 +84,7 @@
 //                 console.log('Login Error: '+data.error);
                 return;
             }
-            ATW.Config.user_name = data.user;
-            ATW.Config.api_key = data.api_key;
+            _.extend(ATW.Config, data);
             app.profiles.fetch({reset:true});
             app.resetViews(['login','contact']);
             router.navigate('visit');
@@ -112,6 +111,19 @@
         },
     });
     
+    ATW.NavBar = Backbone.View.extend({
+        className:'nav-bar',
+        render:function(){
+            var $el = this.$el;
+            $el.empty();
+            var data = {logged:app.isLogged()};
+            Template.render('nav-bar', this, function(t){
+                $el.html(t(data));
+            });
+            return this;
+        },
+    });
+    
     ATW.ContactWidget = Backbone.View.extend({
         className:'contact-widget',
         initialize:function(){
@@ -122,16 +134,11 @@
             var data = {logged:app.isLogged()};
             Template.render('contact-widget', this, function(t){
                 $el.html(t(data));
-                $el.find('.form').hide();
             });
             return this;
         },
         events:{
-            'click .title':  'toggle',
-            'click .form .submit': 'send',
-        },
-        toggle:function(){
-            this.$el.find('.form').toggle();
+            'click .submit': 'send',
         },
         send:function(){
             var subject = this.$el.find('input.subject').val();

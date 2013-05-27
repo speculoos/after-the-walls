@@ -16,9 +16,15 @@
             window.router.navigate('episode/'+this.model.id);
         },
     };
+    
+    var EventProto = {
+        className:'event well',
+    }
+    
     var UserProfileProto = {
         events:{
             'click .submit':'submit',
+            'click .cancel':'cancel',
         },
         postRender: function(){
             
@@ -38,7 +44,10 @@
             });
             model.save(dict);
             router.navigate('');
-        }
+        },
+        cancel:function(){
+            router.navigate('visit');
+        },
     }
     
     var HomeView =  Backbone.View.extend({
@@ -174,6 +183,7 @@
                 //                 _.extend(window.ATW.Views.homeimage.prototype, ImageProto);
                 _.extend(window.ATW.Views.episode.prototype, EpisodeProto);
                 _.extend(window.ATW.Views.userprofile.prototype, UserProfileProto);
+                _.extend(window.ATW.Views.event.prototype, EventProto);
                 
                 this.profiles = new ATW.Collections.userprofile;
                 var self = this;
@@ -199,6 +209,7 @@
                 this.registerComponent('html', new HTMLProxyView);
                 this.registerComponent('audio', new ATW.AudioPlayer);
                 this.registerComponent('agenda', new EventCollectionView);
+                this.registerComponent('navbar', new ATW.NavBar);
                 
                 this.components.home.view.images.fetch();
                 this.components.episodes.view.episodes.fetch();
@@ -282,11 +293,16 @@
             this.components[comp].visible = true;
         },
         isLogged:function(){
-            if(ATW.Config.user_name !== 'AnonymousUser'
-                && ATW.Config.user_name !== undefined
+            if(ATW.Config.user !== 'AnonymousUser'
+                && ATW.Config.user !== undefined
                 && ATW.Config.api_key !== undefined )
                 return true;
             return false;
+        },
+        getUser:function(){
+            if(!this.isLogged())
+                return;
+            return {id:ATW.Config.user_pk, name:ATW.Config.user_name};
         },
         playDefault:function(){
             var item = this.episodes.at(0);
@@ -355,7 +371,7 @@
             this.messages.create({
                 subject:subject,
                 body:body,
-                user:ATW.Config.user_pk,
+                user:this.getUser().id,
             });
         },
     });

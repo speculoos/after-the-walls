@@ -23,27 +23,42 @@
             'profile' : 'profile',
             'logout': 'logout',
             'setlang/:code':'setlang',
+            'agenda':'agenda',
+            'contact':'contact',
         },
         home:function(){
             if(!app.isLogged())
             {
-                app.setComponents('home audio register visit login agenda'.split(' '));
+                app.setComponents('home audio register visit login navbar'.split(' '));
                 app.playAudio('/static/home.mp3');
             }
             else
                 this.visit();
         },
         visit:function(){
-            app.setComponents('player login agenda'.split(' '));
+            app.setComponents('player navbar login'.split(' '));
             app.playDefault();
         },
         episode:function(id){
-            app.setComponents('player login agenda'.split(' '));
+            app.setComponents('player navbar login'.split(' '));
             app.playEpisode(id);
         },
         register:function(){
             app.setComponents('home audio register'.split(' '));
             app.playAudio('/static/home.m4a');
+        },
+        agenda:function(){
+            app.setComponents('navbar login agenda'.split(' '));
+        },
+        contact:function(){
+            if(!app.isLogged())
+            {
+                this.navigate('register');
+            }
+            else
+            {
+                app.setComponents('navbar login contact'.split(' '));
+            }
         },
         profile:function(){
             if(!app.isLogged())

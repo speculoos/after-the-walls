@@ -28,7 +28,7 @@ class HomePageView(TemplateView):
             try:
                 context['user_pk'] = self.request.user.id
             except Exception:
-                pass
+                print 'Unable to get use id: %s'%self.request.user
             try:
                 context['key'] = self.request.user.api_key.key
             except Exception:

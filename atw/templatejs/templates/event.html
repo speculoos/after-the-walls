@@ -1,14 +1,10 @@
-<div class="event">
-<span class="location"><%- data.location %></span>
-    <div class="date">
-        <span class="start"><%- data.start %></span>
-        -
-        <span class="end"><%- data.end %></span>
-    </div>
-    <div class="extra">
-    <span class="name"><%- data.name %></span>
-    <% if(data.body){%>
-    <span class="body"><%- data.body %></span>
-    <%}%>
-    </div>
-</div>
+<% if(data.body){%>
+<small class="pull-right"><%- data.body %></small>
+<%}%>
+<h3><%- data.location %></h3>
+<p class="date lead">
+    <span class="start"><%- data.start %></span>
+    -
+    <span class="end"><%- data.end %></span>
+</p>
+<p class="name"><em><%- data.name %></em>

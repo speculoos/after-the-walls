@@ -1,22 +1,17 @@
 {% load i18n %}
 
-<div class="title">Contact</div>
-<div class="form">
-    <% if(data.logged){ %>
-    <p>{% trans "Contact me!" %}
-    <span>{% trans "Subject" %}</span>
-    <input type="text" class="subject" />
+<div class="well form">
+    <h3>{% trans "Contact me!" %}</h3>
+    <p>
+        <label>{% trans "Subject" %}</label>
+        <input type="text" class="subject input-block-level" />
     </p>
     <p>
-    <span>{% trans "Message" %}</span>
-    <textarea class="text"/>
+        <label>{% trans "Message" %}</label>
+        <textarea class="text input-block-level"/>
     </p>
-    <p>
-    <div class="submit">{% trans "Send" %}</div>
+    <p class="clearfix">
+        <button class="pull-right btn btn-primary submit">{% trans "Send" %}</button>
     </p>
-    <% }else{%>
-    <p>
-    {% trans "You're not registered yet. Please " %}<a href="/#register">{% trans "register" %}</a>.
-    </p>
-    <% } %>
+    
 </div>

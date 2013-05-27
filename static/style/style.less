@@ -42,7 +42,7 @@ span.link{
     -o-border-radius: @radius;*/
 border-bottom-left-radius: @radius;
 border-bottom-right-radius: @radius;
-background-color:black;
+background-color: transparent;
 }
 
 .roundedbox(@radius: 3px){
@@ -68,16 +68,24 @@ background-color:black;
     }
 }
 
-.contact-widget{
+.nav-bar{
     .widget;
-    top:120px;
-    right:20px;
-    .title{
-        cursor:pointer;
-    }
+    .top-widget;
+    top:0;
+    left:40px;
+}
+
+
+.contact-widget{
+    position:absolute;
+    top:0;right:0;bottom:0;left:0;
+    background-color:white;
+    padding:66px 0 0 18%;
+    overflow:auto;
     .form{
-        .submit{
-            cursor:pointer;
+        width:70%;
+        textarea{
+            height:300px;
         }
     }
 }
@@ -270,14 +278,15 @@ background-color:black;
 }
 
 .login-form .log-widget{
-  input[type="text"] input[type="password"] {
-    height: 11px;
-    font-size: 10px;
+    input[type="text"], input[type="password"] {
+            height: 11px;
+            font-size: 10px;
+        }
+    btn-link{
+        a:hover, span:hover{
+            color: white;
+        }
     }
-  btn-link{
-    color: white;
-    a:hover span:hover{color: white;}
-  }
 }
 
 input {
@@ -286,43 +295,19 @@ input {
     }
 
 #audio-player{
-border-radius: 15px;
-background-color: transparent;
-border: 0px solid #e3e3eb;
+    border-radius: 15px;
+    background-color: transparent;
+    border: 0px solid #e3e3eb;
 }
 
-.log-widget{
-  background: transparent;
-}
 
 #events{
-    .roundedbox;
-    .widget;
-    top:32px;
-    left:32px;
-    width:212px;
+    position:absolute;
+    top:0;right:0;bottom:0;left:0;
     background-color:white;
-    color:#666;
+    overflow:auto;
+    padding:66px 0 0 18%;
     .event{
-        .location{
-            
-        }
-        .date{
-            .start{
-                
-            }
-            .end{
-                
-            }
-        }
-        .extra{
-            display:none;
-            .name{
-                
-            }
-            .body{
-                
-            }
-        }
+        width:70%;
     }
 }

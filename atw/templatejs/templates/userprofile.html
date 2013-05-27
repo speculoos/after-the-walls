@@ -7,7 +7,7 @@
     
     
     <label>{% trans "Mr/Mrs/Ms" %}</label>
-    <input type="text" name="title" value="<%- data.title %>" />
+    <input class="" type="text" name="title" value="<%- data.title %>" />
     
     <!-- 
     <label class="checkbox inline">
@@ -22,39 +22,40 @@
     -->
     
     <label>{% trans "Surname" %}</label>
-    <input type="text" name="last_name" value="<%- data.last_name %>" />
+    <input class="" type="text" name="last_name" value="<%- data.last_name %>" />
     
     
     
     <label>{% trans "First name" %}</label>
-    <input type="text" name="first_name"  value="<%- data.first_name %>" />
+    <input class="" type="text" name="first_name"  value="<%- data.first_name %>" />
     
     
     <label>{% trans "Age" %}</label>
-    <input type="text" name="age"  value="<%- data.age %>" />
+    <input class="" type="text" name="age"  value="<%- data.age %>" />
     
     
     <label>{% trans "Skills" %}</label>
-    <input type="text" name="skills"  value="<%- data.skills %>" />
+    <input class="" type="text" name="skills"  value="<%- data.skills %>" />
     
     
     <label>{% trans "Interests" %}</label>
-    <input type="text" name="interests"  value="<%- data.interests %>" />
+    <input class="" type="text" name="interests"  value="<%- data.interests %>" />
     
     
     <label>{% trans "Town/city" %}</label>
-    <input type="text" name="city"  value="<%- data.city %>" />
+    <input class="" type="text" name="city"  value="<%- data.city %>" />
     
     
     <label>{% trans "Country" %}</label>
-    <input type="text" name="country"  value="<%- data.country %>" />
+    <input class="" type="text" name="country"  value="<%- data.country %>" />
     
     
     <label>{% trans "Languages spoken" %}</label>
-    <input type="text" name="languages"  value="<%- data.languages %>" />
+    <input class="" type="text" name="languages"  value="<%- data.languages %>" />
     
-    <p>
-    <div class="btn btn-primary submit">{% trans "Update" %}</div>
+    <p class="pull-right clearfix">
+    <button class="btn cancel">{% trans "Cancel" %}</button>
+    <button class="btn btn-primary submit">{% trans "Update" %}</button>
     </p>
     
 <!--    <label>{% trans "Thank you to update your profile!" %}</label>
