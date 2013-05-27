@@ -15,5 +15,9 @@ class Command(BaseCommand):
         for profile in profiles:
             user = profile.user
             w_email = render_to_string('email_reg1.html', {'user':user})
-            user.email_user('After The Walls Registration', w_email)
-            self.stdout.write('Email sent to %s <%s>' % (user.get_full_name(), user.email))
+            try:
+                user.email_user('After The Walls Registration', w_email)
+                self.stdout.write('Email sent to %s <%s>' % (user.get_full_name(), user.email))
+            except Exception:
+                pass
+            
