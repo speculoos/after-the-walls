@@ -94,7 +94,6 @@ def register_step_0(request):
         u.save()
         ctx = RequestContext(request)
         w_email = render_to_string('email_reg1.html', {'user':u}, ctx)
-        print w_email
         u.email_user('After The Walls Registration', w_email)
     except Exception as e:
         return HttpResponseServerError(json.dumps({'error':str(e)}), mimetype="application/json")
